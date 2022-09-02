@@ -5,11 +5,11 @@ using Kodlama.io.devs.Domain.Entities;
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Rules
 {
-    public class ProgrammingLanguageRules
+    public class ProgrammingLanguageBusinessRules
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
 
-        public ProgrammingLanguageRules(IProgrammingLanguageRepository programmingLanguageRepository)
+        public ProgrammingLanguageBusinessRules(IProgrammingLanguageRepository programmingLanguageRepository)
         {
             _programmingLanguageRepository = programmingLanguageRepository;
         }

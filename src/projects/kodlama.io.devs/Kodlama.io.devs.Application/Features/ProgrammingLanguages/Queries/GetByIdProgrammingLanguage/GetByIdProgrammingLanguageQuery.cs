@@ -15,7 +15,7 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Queries.GetB
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
             private readonly IMapper _mapper;
-            private readonly ProgrammingLanguageRules _programmingLanguageRules;
+            private readonly ProgrammingLanguageBusinessRules _programmingLanguageRules;
 
             public GetByIdProgrammingLanguageQueryHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper)
             {

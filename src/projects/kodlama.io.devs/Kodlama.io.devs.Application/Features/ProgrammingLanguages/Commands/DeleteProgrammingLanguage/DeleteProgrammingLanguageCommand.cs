@@ -15,9 +15,9 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.Del
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
             private readonly IMapper _mapper;
-            private readonly ProgrammingLanguageRules _programmingLanguageRules;
+            private readonly ProgrammingLanguageBusinessRules _programmingLanguageRules;
 
-            public DeleteProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageRules programmingLanguageRules)
+            public DeleteProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageRules)
             {
                 _programmingLanguageRepository = programmingLanguageRepository;
                 _mapper = mapper;

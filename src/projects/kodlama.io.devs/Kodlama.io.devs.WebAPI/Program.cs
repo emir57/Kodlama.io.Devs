@@ -1,3 +1,4 @@
+using Kodlama.io.devs.Application;
 using Kodlama.io.devs.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 #region Registrations
 
 builder.Services.AddPersistenceServices();
+builder.Services.AddApplicationServices();
 
 #endregion
 
