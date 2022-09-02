@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Core.Application.Requests;
 using Core.Persistence.Paging;
-using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Models;
 using Kodlama.io.devs.Application.Services.Repositories;
 using Kodlama.io.devs.Domain.Entities;
 using MediatR;

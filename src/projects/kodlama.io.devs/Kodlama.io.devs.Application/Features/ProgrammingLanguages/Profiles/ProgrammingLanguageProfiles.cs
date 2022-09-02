@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Persistence.Paging;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Models;
 using Kodlama.io.devs.Domain.Entities;
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Profiles
