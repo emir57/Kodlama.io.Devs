@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\corePackages\Core.Persistence\Core.Persistence.csproj" />
+    <ProjectReference Include="..\Kodlama.io.devs.Application\Kodlama.io.devs.Application.csproj" />
     <ProjectReference Include="..\Kodlama.io.devs.Domain\Kodlama.io.devs.Domain.csproj" />
   </ItemGroup>
 

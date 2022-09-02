@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Kodlama.io.devs.Persistence\Kodlama.io.devs.Persistence.csproj" />
+    <ProjectReference Include="..\..\..\corePackages\Core.Persistence\Core.Persistence.csproj" />
+    <ProjectReference Include="..\Kodlama.io.devs.Domain\Kodlama.io.devs.Domain.csproj" />
   </ItemGroup>
 
 </Project>
