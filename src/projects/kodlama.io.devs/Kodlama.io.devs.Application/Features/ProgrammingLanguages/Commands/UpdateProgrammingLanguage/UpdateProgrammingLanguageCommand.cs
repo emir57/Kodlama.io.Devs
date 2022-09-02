@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.devs.Application.Services.Repositories;
 using Kodlama.io.devs.Domain.Entities;
 using MediatR;
@@ -15,17 +16,23 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.Upd
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
             private readonly IMapper _mapper;
+            private readonly ProgrammingLanguageRules _programmingLanguageRules;
 
-            public UpdateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper)
+            public UpdateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageRules programmingLanguageRules)
             {
                 _programmingLanguageRepository = programmingLanguageRepository;
                 _mapper = mapper;
+                _programmingLanguageRules = programmingLanguageRules;
             }
 
             public async Task<UpdatedProgrammingLanguageDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
+                await _programmingLanguageRules
+                    .ProgrammingLanguageNameCannotBeDuplicatedWhenInsertedOrUpdated(request.Name);
+                await _programmingLanguageRules
+                    .ProgrammingLanguageShouldExistsWhenRequested(request.Id);
+
                 ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
-                //todo: check null updated entity
 
                 _mapper.Map(request, programmingLanguage);
                 ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(programmingLanguage);

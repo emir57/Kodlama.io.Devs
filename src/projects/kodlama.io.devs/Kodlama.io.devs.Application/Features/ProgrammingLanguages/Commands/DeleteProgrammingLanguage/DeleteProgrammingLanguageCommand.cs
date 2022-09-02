@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.devs.Application.Services.Repositories;
 using Kodlama.io.devs.Domain.Entities;
 using MediatR;
@@ -14,17 +15,21 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.Del
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
             private readonly IMapper _mapper;
+            private readonly ProgrammingLanguageRules _programmingLanguageRules;
 
-            public DeleteProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper)
+            public DeleteProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageRules programmingLanguageRules)
             {
                 _programmingLanguageRepository = programmingLanguageRepository;
                 _mapper = mapper;
+                _programmingLanguageRules = programmingLanguageRules;
             }
 
             public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
+                await _programmingLanguageRules
+                    .ProgrammingLanguageShouldExistsWhenRequested(request.Id);
+
                 ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
-                //todo: check entity null
 
                 ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(programmingLanguage);
 

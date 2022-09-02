@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.devs.Application.Services.Repositories;
 using Kodlama.io.devs.Domain.Entities;
 using MediatR;
@@ -14,6 +15,7 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Queries.GetB
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
             private readonly IMapper _mapper;
+            private readonly ProgrammingLanguageRules _programmingLanguageRules;
 
             public GetByIdProgrammingLanguageQueryHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper)
             {
@@ -23,8 +25,10 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Queries.GetB
 
             public async Task<GetByIdProgrammingLanguageDto> Handle(GetByIdProgrammingLanguageQuery request, CancellationToken cancellationToken)
             {
+                await _programmingLanguageRules
+                    .ProgrammingLanguageShouldExistsWhenRequested(request.Id);
+
                 ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
-                //todo: check null entity
 
                 GetByIdProgrammingLanguageDto getByIdProgrammingLanguageDto = _mapper.Map<GetByIdProgrammingLanguageDto>(programmingLanguage);
                 return getByIdProgrammingLanguageDto;
