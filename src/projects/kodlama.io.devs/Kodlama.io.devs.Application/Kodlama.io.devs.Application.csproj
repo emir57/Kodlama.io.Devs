@@ -11,4 +11,16 @@
     <ProjectReference Include="..\Kodlama.io.devs.Domain\Kodlama.io.devs.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\ProgrammingLanguages\Models\" />
+    <Folder Include="Features\ProgrammingLanguages\Rules\" />
+    <Folder Include="Features\ProgrammingLanguages\Queries\" />
+    <Folder Include="Features\ProgrammingLanguages\Profiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
 </Project>

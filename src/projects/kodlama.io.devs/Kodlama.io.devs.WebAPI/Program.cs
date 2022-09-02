@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-#region Reistrations
+#region Registrations
 
 builder.Services.AddPersistenceServices();
 
