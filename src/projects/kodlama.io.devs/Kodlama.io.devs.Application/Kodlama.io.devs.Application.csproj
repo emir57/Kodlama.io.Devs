@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\corePackages\Core.Application\Core.Application.csproj" />
     <ProjectReference Include="..\..\..\corePackages\Core.Persistence\Core.Persistence.csproj" />
     <ProjectReference Include="..\Kodlama.io.devs.Domain\Kodlama.io.devs.Domain.csproj" />
   </ItemGroup>
@@ -14,7 +15,6 @@
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguages\Models\" />
     <Folder Include="Features\ProgrammingLanguages\Rules\" />
-    <Folder Include="Features\ProgrammingLanguages\Queries\" />
     <Folder Include="Features\ProgrammingLanguages\Profiles\" />
   </ItemGroup>
 
