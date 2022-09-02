@@ -31,9 +31,15 @@ namespace Kodlama.io.devs.Persistence.Contexts
         {
             modelBuilder.Entity<ProgrammingLanguage>(p =>
             {
-                p.ToTable("ProgrammingLanguages").HasKey(p => p.Id);
-                p.Property(p => p.Id).HasColumnName("Id");
-                p.Property(p => p.Name).HasColumnName("Name");
+                p.ToTable("ProgrammingLanguages")
+                    .HasKey(p => p.Id);
+
+                p.Property(p => p.Id)
+                    .HasColumnName("Id");
+
+                p.Property(p => p.Name)
+                    .HasColumnName("Name")
+                    .HasMaxLength(50);
             });
 
             ProgrammingLanguage[] programmingLanguageEntitySeeds =
