@@ -23,11 +23,11 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.Cre
 
             public async Task<CreatedProgrammingLanguageDto> Handle(CreateProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
-                ProgrammingLanguage mappedEntity = _mapper.Map<ProgrammingLanguage>(request);
+                ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
                 
-                ProgrammingLanguage addedEntity = await _programmingLanguageRepository.AddAsync(mappedEntity);
+                ProgrammingLanguage addedProgrammingLanguage = await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage);
 
-                CreatedProgrammingLanguageDto createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(addedEntity);
+                CreatedProgrammingLanguageDto createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(addedProgrammingLanguage);
                 return createdProgrammingLanguageDto;
             }
         }

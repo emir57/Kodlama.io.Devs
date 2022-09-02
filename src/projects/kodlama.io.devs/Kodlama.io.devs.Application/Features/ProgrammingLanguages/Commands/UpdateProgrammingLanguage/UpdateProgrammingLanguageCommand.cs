@@ -28,9 +28,9 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.Upd
                 //todo: check null updated entity
 
                 _mapper.Map(request, programmingLanguage);
-                ProgrammingLanguage updatedEntity = await _programmingLanguageRepository.UpdateAsync(programmingLanguage);
+                ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(programmingLanguage);
 
-                UpdatedProgrammingLanguageDto updatedProgrammingLanguageDto = _mapper.Map<UpdatedProgrammingLanguageDto>(updatedEntity);
+                UpdatedProgrammingLanguageDto updatedProgrammingLanguageDto = _mapper.Map<UpdatedProgrammingLanguageDto>(updatedProgrammingLanguage);
                 return updatedProgrammingLanguageDto;
             }
         }
