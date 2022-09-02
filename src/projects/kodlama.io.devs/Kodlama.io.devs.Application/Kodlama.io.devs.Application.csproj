@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Kodlama.io.devs.Persistence\Kodlama.io.devs.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
