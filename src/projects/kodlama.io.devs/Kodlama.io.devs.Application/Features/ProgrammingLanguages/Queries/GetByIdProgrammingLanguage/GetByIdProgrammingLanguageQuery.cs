@@ -17,10 +17,11 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Queries.GetB
             private readonly IMapper _mapper;
             private readonly ProgrammingLanguageBusinessRules _programmingLanguageRules;
 
-            public GetByIdProgrammingLanguageQueryHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper)
+            public GetByIdProgrammingLanguageQueryHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageRules)
             {
                 _programmingLanguageRepository = programmingLanguageRepository;
                 _mapper = mapper;
+                _programmingLanguageRules = programmingLanguageRules;
             }
 
             public async Task<GetByIdProgrammingLanguageDto> Handle(GetByIdProgrammingLanguageQuery request, CancellationToken cancellationToken)

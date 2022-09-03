@@ -17,8 +17,8 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Rules
         public async Task ProgrammingLanguageNameCannotBeDuplicatedWhenInsertedOrUpdated(string name)
         {
             ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Name.ToLower() == name.ToLower());
-            if (programmingLanguage == null)
-                throw new BusinessException(ProgrammingLanguageMessages.ProgrammingLanguageCannotBeDuplicated); ;
+            if (programmingLanguage != null)
+                throw new BusinessException(ProgrammingLanguageMessages.ProgrammingLanguageCannotBeDuplicated);
         }
 
         public async Task ProgrammingLanguageShouldExistsWhenRequested(int id)

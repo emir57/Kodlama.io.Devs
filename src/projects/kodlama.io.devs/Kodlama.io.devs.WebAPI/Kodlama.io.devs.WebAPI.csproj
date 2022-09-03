@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Kodlama.io.devs.Application\Kodlama.io.devs.Application.csproj" />
     <ProjectReference Include="..\Kodlama.io.devs.Persistence\Kodlama.io.devs.Persistence.csproj" />
   </ItemGroup>
