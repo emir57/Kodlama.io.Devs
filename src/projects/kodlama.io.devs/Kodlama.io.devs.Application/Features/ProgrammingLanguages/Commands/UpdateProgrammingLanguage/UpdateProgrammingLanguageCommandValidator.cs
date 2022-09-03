@@ -6,18 +6,18 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.Upd
     {
         public UpdateProgrammingLanguageCommandValidator()
         {
-            RuleFor(c => c.Id)
+            RuleFor(d => d.Id)
                 .NotEmpty()
                 .NotNull();
 
-            RuleFor(c => c.Name)
+            RuleFor(d => d.Name)
                 .NotEmpty()
                 .NotNull();
 
-            RuleFor(c => c.Name)
+            RuleFor(d => d.Name)
                 .MaximumLength(50);
 
-            RuleFor(c => c.Name)
+            RuleFor(d => d.Name)
                 .MinimumLength(1);
         }
     }
