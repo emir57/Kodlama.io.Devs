@@ -1,3 +1,4 @@
+using Core.CrossCuttingConcerns.Exceptions;
 using Kodlama.io.devs.Application;
 using Kodlama.io.devs.Persistence;
 
@@ -27,6 +28,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureCustomExceptionMiddleware();
 
 app.UseHttpsRedirection();
 
