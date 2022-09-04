@@ -5,37 +5,36 @@ using Kodlama.io.devs.Application.Services.Repositories;
 using Kodlama.io.devs.Domain.Entities;
 using MediatR;
 
-namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage
+namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
+
+public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageDto>
 {
-    public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageDto>
+    public int Id { get; set; }
+
+    public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageDto>
     {
-        public int Id { get; set; }
+        private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
+        private readonly IMapper _mapper;
+        private readonly ProgrammingLanguageBusinessRules _programmingLanguageRules;
 
-        public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageDto>
+        public DeleteProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageRules)
         {
-            private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
-            private readonly IMapper _mapper;
-            private readonly ProgrammingLanguageBusinessRules _programmingLanguageRules;
+            _programmingLanguageRepository = programmingLanguageRepository;
+            _mapper = mapper;
+            _programmingLanguageRules = programmingLanguageRules;
+        }
 
-            public DeleteProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageRules)
-            {
-                _programmingLanguageRepository = programmingLanguageRepository;
-                _mapper = mapper;
-                _programmingLanguageRules = programmingLanguageRules;
-            }
+        public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
+        {
+            await _programmingLanguageRules
+                .ProgrammingLanguageShouldExistsWhenRequested(request.Id);
 
-            public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken)
-            {
-                await _programmingLanguageRules
-                    .ProgrammingLanguageShouldExistsWhenRequested(request.Id);
+            ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
 
-                ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
+            ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(programmingLanguage);
 
-                ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(programmingLanguage);
-
-                DeletedProgrammingLanguageDto deletedProgrammingLanguageDto = _mapper.Map<DeletedProgrammingLanguageDto>(deletedProgrammingLanguage);
-                return deletedProgrammingLanguageDto;
-            }
+            DeletedProgrammingLanguageDto deletedProgrammingLanguageDto = _mapper.Map<DeletedProgrammingLanguageDto>(deletedProgrammingLanguage);
+            return deletedProgrammingLanguageDto;
         }
     }
 }

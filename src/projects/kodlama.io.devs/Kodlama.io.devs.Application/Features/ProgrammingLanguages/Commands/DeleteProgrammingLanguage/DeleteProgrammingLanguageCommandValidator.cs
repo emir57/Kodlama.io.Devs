@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
 
-namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage
+namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
+
+public class DeleteProgrammingLanguageCommandValidator : AbstractValidator<DeleteProgrammingLanguageCommand>
 {
-    public class DeleteProgrammingLanguageCommandValidator : AbstractValidator<DeleteProgrammingLanguageCommand>
+    public DeleteProgrammingLanguageCommandValidator()
     {
-        public DeleteProgrammingLanguageCommandValidator()
-        {
-            RuleFor(d => d.Id)
-                .NotEmpty()
-                .NotNull();
-        }
+        RuleFor(d => d.Id)
+            .NotEmpty()
+            .NotNull();
     }
 }
