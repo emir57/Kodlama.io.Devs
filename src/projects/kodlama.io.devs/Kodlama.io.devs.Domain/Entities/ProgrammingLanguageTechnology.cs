@@ -2,7 +2,7 @@
 
 namespace Kodlama.io.devs.Domain.Entities;
 
-public class ProgrammingLanguageTechnology : Entity
+public sealed class ProgrammingLanguageTechnology : Entity
 {
     public string Name { get; set; }
     public int ProgrammingLanguageId { get; set; }
