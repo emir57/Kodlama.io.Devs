@@ -16,6 +16,7 @@ public class KodlamaDevDbContext : DbContext
     }
 
     public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
+    public DbSet<ProgrammingLanguageTechnology> ProgrammingLanguageTechnologies { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -36,15 +37,31 @@ public class KodlamaDevDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
         programmingLanguageEntityBuilder(modelBuilder);
+        programmingLanguageTechnologyEntityBuilder(modelBuilder);
     }
 
     private void programmingLanguageEntityBuilder(ModelBuilder modelBuilder)
     {
         ProgrammingLanguage[] programmingLanguageEntitySeeds =
         {
-            new(1,"C#")
+            new(1,"C#"),
+            new(2,"Java"),
+            new(3,"JavaScript")
         };
         modelBuilder.Entity<ProgrammingLanguage>().HasData(programmingLanguageEntitySeeds);
+    }
+    private void programmingLanguageTechnologyEntityBuilder(ModelBuilder modelBuilder)
+    {
+        ProgrammingLanguageTechnology[] programmingLanguageTechnologyEntitySeeds =
+        {
+            new(1,"Asp.Net",1),
+            new(2,"Spring",2),
+            new(3,"Angular",3),
+            new(4,"React",3),
+            new(5,"Vue",3)
+        };
+        modelBuilder.Entity<ProgrammingLanguageTechnology>().HasData(programmingLanguageTechnologyEntitySeeds);
     }
 }
