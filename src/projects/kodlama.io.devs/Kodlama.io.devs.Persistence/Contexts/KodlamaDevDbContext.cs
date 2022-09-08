@@ -2,6 +2,7 @@
 using Kodlama.io.devs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace Kodlama.io.devs.Persistence.Contexts;
 
@@ -24,24 +25,12 @@ public class KodlamaDevDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         programmingLanguageEntityBuilder(modelBuilder);
     }
 
     private void programmingLanguageEntityBuilder(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ProgrammingLanguage>(p =>
-        {
-            p.ToTable("ProgrammingLanguages")
-                .HasKey(p => p.Id);
-
-            p.Property(p => p.Id)
-                .HasColumnName("Id");
-
-            p.Property(p => p.Name)
-                .HasColumnName("Name")
-                .HasMaxLength(50);
-        });
-
         ProgrammingLanguage[] programmingLanguageEntitySeeds =
         {
             new(1,"C#")
