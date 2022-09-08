@@ -10,7 +10,7 @@ public sealed class ProgrammingLanguageTechnology : Entity
 
     public ProgrammingLanguageTechnology()
     {
-        ProgrammingLanguage = new ProgrammingLanguage();
+        //ProgrammingLanguage = new ProgrammingLanguage();
     }
 
     public ProgrammingLanguageTechnology(int id, string name, int programmingLanguageId) : this()

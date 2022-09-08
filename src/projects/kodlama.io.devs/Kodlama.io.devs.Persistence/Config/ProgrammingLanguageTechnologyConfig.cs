@@ -11,8 +11,6 @@ public class ProgrammingLanguageTechnologyConfig : IEntityTypeConfiguration<Prog
         builder.ToTable("ProgrammingLanguageTechnologies")
             .HasKey(p => p.Id);
 
-        builder.HasOne(p => p.ProgrammingLanguage);
-
         builder.Property(p => p.Id)
             .HasColumnName("Id");
 
@@ -26,5 +24,7 @@ public class ProgrammingLanguageTechnologyConfig : IEntityTypeConfiguration<Prog
             .HasColumnName("UpdatedAt");
         builder.Property(p => p.DeletedAt)
             .HasColumnName("DeletedAt");
+
+        builder.HasOne(p => p.ProgrammingLanguage);
     }
 }

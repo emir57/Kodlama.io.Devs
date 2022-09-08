@@ -20,9 +20,11 @@ public class KodlamaDevDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        optionsBuilder.EnableSensitiveDataLogging();
+
         IConfigurationBuilder configurationBuilder = new ConfigurationManager()
             .AddJsonFile("appsettings.json");
-
+        
         optionsBuilder.UseSqlServer(configurationBuilder.GetConnectionString("SqlServer"));
     }
 
