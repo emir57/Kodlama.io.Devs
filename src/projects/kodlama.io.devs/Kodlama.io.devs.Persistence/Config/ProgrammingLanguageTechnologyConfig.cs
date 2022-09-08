@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Kodlama.io.devs.Persistence.Config;
 
-public class ProgrammingLanguageConfig : IEntityTypeConfiguration<ProgrammingLanguage>
+public class ProgrammingLanguageTechnologyConfig : IEntityTypeConfiguration<ProgrammingLanguageTechnology>
 {
-    public void Configure(EntityTypeBuilder<ProgrammingLanguage> builder)
+    public void Configure(EntityTypeBuilder<ProgrammingLanguageTechnology> builder)
     {
-        builder.ToTable("ProgrammingLanguages")
+        builder.ToTable("ProgrammingLanguageTechnologies")
             .HasKey(p => p.Id);
 
-        builder.HasMany(p => p.ProgrammingLanguageTechnologies);
+        builder.HasOne(p => p.ProgrammingLanguage);
 
         builder.Property(p => p.Id)
             .HasColumnName("Id");
