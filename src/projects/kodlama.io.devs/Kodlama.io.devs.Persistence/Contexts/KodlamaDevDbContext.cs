@@ -24,7 +24,7 @@ public class KodlamaDevDbContext : DbContext
 
         IConfigurationBuilder configurationBuilder = new ConfigurationManager()
             .AddJsonFile("appsettings.json");
-        
+
         optionsBuilder.UseSqlServer(configurationBuilder.GetConnectionString("SqlServer"));
     }
 
@@ -48,9 +48,9 @@ public class KodlamaDevDbContext : DbContext
     {
         ProgrammingLanguage[] programmingLanguageEntitySeeds =
         {
-            new(1,"C#"),
-            new(2,"Java"),
-            new(3,"JavaScript")
+            new(1,"C#",DateTime.Now),
+            new(2,"Java",DateTime.Now),
+            new(3,"JavaScript",DateTime.Now)
         };
         modelBuilder.Entity<ProgrammingLanguage>().HasData(programmingLanguageEntitySeeds);
     }
@@ -58,11 +58,11 @@ public class KodlamaDevDbContext : DbContext
     {
         ProgrammingLanguageTechnology[] programmingLanguageTechnologyEntitySeeds =
         {
-            new(1,"Asp.Net",1),
-            new(2,"Spring",2),
-            new(3,"Angular",3),
-            new(4,"React",3),
-            new(5,"Vue",3)
+            new(1,"Asp.Net",1,DateTime.Now),
+            new(2,"Spring",2,DateTime.Now),
+            new(3,"Angular",3,DateTime.Now),
+            new(4,"React",3,DateTime.Now),
+            new(5,"Vue",3,DateTime.Now)
         };
         modelBuilder.Entity<ProgrammingLanguageTechnology>().HasData(programmingLanguageTechnologyEntitySeeds);
     }
