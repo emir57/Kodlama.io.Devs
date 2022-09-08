@@ -28,15 +28,8 @@ public class KodlamaDevDbContext : DbContext
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         IEnumerable<EntityEntry<Entity>> entries = ChangeTracker.Entries<Entity>();
-        foreach (EntityEntry<Entity> entry in entries)
-        {
-            var _ = entry.State switch
-            {
-                EntityState.Added => entry.Entity.CreatedAt = DateTime.Now,
-                EntityState.Modified => entry.Entity.UpdatedAt = DateTime.Now,
-                _ => DateTime.Now
-            };
-        }
+        entries.SetStateDate();
+
         return base.SaveChangesAsync(cancellationToken);
     }
 
