@@ -1,5 +1,6 @@
 ﻿using Core.Application.Pipelines.Validation;
 using FluentValidation;
+using Kodlama.io.devs.Application.Features.Authorizations.Rules;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Rules;
 using MediatR;
@@ -23,6 +24,7 @@ public static class ApplicationServiceRegistration
         #region BusinessRules
         services.AddScoped<ProgrammingLanguageBusinessRules>();
         services.AddScoped<ProgrammingLanguageTechnologyBusinessRules>();
+        services.AddScoped<AuthorizationBusinessRules>();
         #endregion
 
         #region FluentValidation
