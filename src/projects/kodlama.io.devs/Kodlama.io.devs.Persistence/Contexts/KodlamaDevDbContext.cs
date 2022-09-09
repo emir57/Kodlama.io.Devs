@@ -99,14 +99,14 @@ public class KodlamaDevDbContext : DbContext
         User getUser()
         {
             byte[] passwordHash, passwordSalt;
-            string password = _configuration.GetSection("AdminUser:Password").ToString();
-            HashingHelper.CreatePasswordHash("", out passwordHash, out passwordSalt);
+            string password = _configuration.GetSection("AdminUser:Password").Value;
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
             return new()
             {
                 Id = 1,
-                FirstName = _configuration.GetSection("AdminUser:FirstName").ToString(),
-                LastName = _configuration.GetSection("AdminUser:LastName").ToString(),
-                Email = _configuration.GetSection("AdminUser:Email").ToString(),
+                FirstName = _configuration.GetSection("AdminUser:FirstName").Value,
+                LastName = _configuration.GetSection("AdminUser:LastName").Value,
+                Email = _configuration.GetSection("AdminUser:Email").Value,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 Status = true,
