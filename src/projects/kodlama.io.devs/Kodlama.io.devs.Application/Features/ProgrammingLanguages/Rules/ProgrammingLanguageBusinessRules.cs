@@ -16,14 +16,20 @@ public sealed class ProgrammingLanguageBusinessRules
 
     public async Task ProgrammingLanguageNameCannotBeDuplicatedWhenInsertedOrUpdated(string name)
     {
-        ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Name.ToLower() == name.ToLower());
+        ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(
+            p => p.Name.ToLower() == name.ToLower(),
+            enableTracking: false);
+
         if (programmingLanguage != null)
             throw new BusinessException(ProgrammingLanguageMessages.ProgrammingLanguageCannotBeDuplicated);
     }
 
     public async Task ProgrammingLanguageShouldExistsWhenRequested(int id)
     {
-        ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == id);
+        ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(
+            p => p.Id == id,
+            enableTracking: false);
+
         if (programmingLanguage == null)
             throw new BusinessException(ProgrammingLanguageMessages.ProgrammingLanguageNotExists);
     }
