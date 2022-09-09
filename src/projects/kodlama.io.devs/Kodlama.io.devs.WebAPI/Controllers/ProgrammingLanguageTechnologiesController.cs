@@ -9,7 +9,7 @@ namespace Kodlama.io.devs.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProgrammingLanguageTechnologyController : BaseController
+    public class ProgrammingLanguageTechnologiesController : BaseController
     {
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PageRequest pageRequest)
