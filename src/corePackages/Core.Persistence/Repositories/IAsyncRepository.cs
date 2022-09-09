@@ -7,7 +7,7 @@ namespace Core.Persistence.Repositories;
 public interface IAsyncRepository<T> : IQuery<T> where T : Entity
 {
     Task<T?> GetAsync(Expression<Func<T, bool>> predicate,
-                      Func<IQueryable<T>, IIncludableQueryable<T, object>>? include,
+                      Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
                       bool enableTracking = true);
 
     Task<IPaginate<T>> GetListAsync(Expression<Func<T, bool>>? predicate = null,

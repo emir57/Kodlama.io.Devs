@@ -27,7 +27,7 @@ public sealed class GetByIdProgrammingLanguageTechnologyQuery : IRequest<GetById
             //todo: check null
             ProgrammingLanguageTechnology programmingLanguageTechnology = await _rogrammingLanguageTechnologyRepository.GetAsync(
                 p => p.Id == request.Id,
-                include: x => x.Include(p => p.ProgrammingLanguage));
+                include: x => x.Include(p => p.ProgrammingLanguage), enableTracking: false);
 
             GetByIdProgrammingLanguageTechnologyDto result = _mapper.Map<GetByIdProgrammingLanguageTechnologyDto>(programmingLanguageTechnology);
             return result;
