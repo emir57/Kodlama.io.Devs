@@ -1,5 +1,6 @@
 ﻿using Core.Application.Requests;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Commands.CreateProgrammingLanguageTechnology;
+using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Commands.DeleteProgrammingLangaugeTechnology;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Commands.UpdateProgrammingLangaugeTechnology;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Dtos;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Models;
@@ -41,4 +42,12 @@ public class ProgrammingLanguageTechnologiesController : BaseController
         UpdatedProgrammingLanguageTechnologyDto result = await Mediator.Send(request);
         return Ok(result);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteProgrammingLanguageTechnologyCommand request)
+    {
+        DeletedProgrammingLanguageTechnologyDto result = await Mediator.Send(request);
+        return Ok(result);
+    }
+
 }
