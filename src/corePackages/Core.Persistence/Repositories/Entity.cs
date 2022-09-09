@@ -3,9 +3,9 @@
 public class Entity
 {
     public int Id { get; set; }
-    public DateTime? CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
-    public DateTime? DeletedAt { get; set; }
+    public virtual DateTime? CreatedAt { get; set; }
+    public virtual DateTime? UpdatedAt { get; set; }
+    public virtual DateTime? DeletedAt { get; set; }
 
     public Entity()
     {

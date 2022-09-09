@@ -1,5 +1,6 @@
 ﻿using Core.Persistence.Extensions;
 using Core.Persistence.Repositories;
+using Core.Security.Entities;
 using Kodlama.io.devs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -18,7 +19,10 @@ public class KodlamaDevDbContext : DbContext
     public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
     public DbSet<ProgrammingLanguageTechnology> ProgrammingLanguageTechnologies { get; set; }
 
-
+    public DbSet<User> Users { get; set; }
+    public DbSet<OperationClaim> OperationClaims { get; set; }
+    public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

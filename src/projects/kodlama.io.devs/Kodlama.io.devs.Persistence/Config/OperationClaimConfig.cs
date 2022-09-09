@@ -18,5 +18,12 @@ public class OperationClaimConfig : IEntityTypeConfiguration<OperationClaim>
             .HasColumnName("Name")
             .IsRequired()
             .HasMaxLength(50);
+
+        builder.Property(p => p.CreatedAt)
+            .HasColumnName("CreatedAt");
+        builder.Property(p => p.UpdatedAt)
+            .HasColumnName("UpdatedAt");
+        builder.Property(p => p.DeletedAt)
+            .HasColumnName("DeletedAt");
     }
 }
