@@ -16,11 +16,17 @@ public sealed class AuthorizationBusinessRules
         _userRepository = userRepository;
     }
 
-    public async Task UserShouldExistsWhenLoginOrRegister(string userEmail)
+    public async Task UserShouldExistsWhenLogin(string userEmail)
     {
         User? user = await _userRepository.GetAsync(u => u.Email.ToLower() == userEmail.ToLower());
         if (user == null)
             throw new BusinessException(AuthorizationMessages.UserNotFound);
+    }
+    public async Task UserShouldNotExistsWhenRegister(string userEmail)
+    {
+        User? user = await _userRepository.GetAsync(u => u.Email.ToLower() == userEmail.ToLower());
+        if (user != null)
+            throw new BusinessException(AuthorizationMessages.UserAlreadyExists);
     }
 
     public void VerifyPassword(UserForLoginDto userForLoginDto, User user)
