@@ -18,7 +18,12 @@ public class ProgrammingLanguageTechnologyConfig : IEntityTypeConfiguration<Prog
 
         builder.Property(p => p.Name)
             .HasColumnName("Name")
-            .HasMaxLength(50);
+            .HasMaxLength(50)
+            .IsRequired();
+
+        builder.Property(p => p.ProgrammingLanguageId)
+            .HasColumnName("ProgrammingLanguageId")
+            .IsRequired();
 
         builder.Property(p => p.CreatedAt)
             .HasColumnName("CreatedAt");

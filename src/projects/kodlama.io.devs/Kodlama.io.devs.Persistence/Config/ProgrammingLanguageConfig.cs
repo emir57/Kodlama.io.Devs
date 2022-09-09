@@ -18,7 +18,8 @@ public class ProgrammingLanguageConfig : IEntityTypeConfiguration<ProgrammingLan
 
         builder.Property(p => p.Name)
             .HasColumnName("Name")
-            .HasMaxLength(50);
+            .HasMaxLength(50)
+            .IsRequired();
 
         builder.Property(p => p.CreatedAt)
             .HasColumnName("CreatedAt");
