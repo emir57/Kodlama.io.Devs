@@ -1,7 +1,17 @@
 # Kodlama.io.Devs
 
 <h2> Startup </h2>
+<h3> ⬇️ Configure admin user in appsettings.json ⬇️ </h3>
 
+```json
+"AdminUser": {
+    "FirstName": "admin_first_name",
+    "LastName": "admin_last_name",
+    "Email": "admin_email@hotmail.com",
+    "Password": "admin_password"
+  }
+```
+<hr>
 <h3> ⬇️ Configure connection string in appsettings.json ⬇️ </h3>
 
 ```json
