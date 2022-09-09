@@ -29,10 +29,11 @@ public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLangu
             await _programmingLanguageRules
                 .ProgrammingLanguageShouldExistsWhenRequested(request.Id);
 
-            ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id,
+            ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id,
+                enableTracking: false,
                 cancellationToken: cancellationToken);
 
-            ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(programmingLanguage);
+            ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(programmingLanguage, cancellationToken);
 
             DeletedProgrammingLanguageDto deletedProgrammingLanguageDto = _mapper.Map<DeletedProgrammingLanguageDto>(deletedProgrammingLanguage);
             return deletedProgrammingLanguageDto;

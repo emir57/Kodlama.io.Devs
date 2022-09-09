@@ -29,12 +29,12 @@ public sealed class CreateProgrammingLanguageTechnologyCommand : IRequest<Create
         {
             await _programmingLanguageTechnologyBusinessRules
                 .ProgrammingLanguageShouldExistsWhenProgrammingLanguageTechnologyInsertedOrUpdated(request.ProgrammingLanguageId);
-            
+
             await _programmingLanguageTechnologyBusinessRules
                 .ProgrammingLanguageTechnologyNameCannotBeDuplicatedWhenInsertedOrUpdated(request.Name);
             ProgrammingLanguageTechnology mappedProgrammingLanguageTechnology = _mapper.Map<ProgrammingLanguageTechnology>(request);
 
-            ProgrammingLanguageTechnology addedProgrammingLanguageTechnology = await _programmingLanguageTechnologyRepository.AddAsync(mappedProgrammingLanguageTechnology);
+            ProgrammingLanguageTechnology addedProgrammingLanguageTechnology = await _programmingLanguageTechnologyRepository.AddAsync(mappedProgrammingLanguageTechnology, cancellationToken);
 
             CreatedProgrammingLanguageTechnologyDto result = _mapper.Map<CreatedProgrammingLanguageTechnologyDto>(addedProgrammingLanguageTechnology);
             return result;

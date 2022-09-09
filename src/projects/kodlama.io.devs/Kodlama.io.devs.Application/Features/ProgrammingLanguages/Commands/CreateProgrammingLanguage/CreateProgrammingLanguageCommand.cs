@@ -31,7 +31,7 @@ public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLangu
 
             ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
 
-            ProgrammingLanguage addedProgrammingLanguage = await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage);
+            ProgrammingLanguage addedProgrammingLanguage = await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage, cancellationToken);
 
             CreatedProgrammingLanguageDto createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(addedProgrammingLanguage);
             return createdProgrammingLanguageDto;

@@ -39,11 +39,11 @@ public sealed class UpdateProgrammingLanguageTechnologyCommand : IRequest<Update
 
             ProgrammingLanguageTechnology? programmingLanguageTechnology = await _programmingLanguageTechnologyRepository.GetAsync(
                 p => p.Id == request.Id,
-                enableTracking: false);
+                cancellationToken: cancellationToken);
 
             _mapper.Map(request, programmingLanguageTechnology);
 
-            ProgrammingLanguageTechnology updatedProgrammingLanguageRechnology = await _programmingLanguageTechnologyRepository.UpdateAsync(programmingLanguageTechnology);
+            ProgrammingLanguageTechnology updatedProgrammingLanguageRechnology = await _programmingLanguageTechnologyRepository.UpdateAsync(programmingLanguageTechnology, cancellationToken);
 
             UpdatedProgrammingLanguageTechnologyDto result = _mapper.Map<UpdatedProgrammingLanguageTechnologyDto>(updatedProgrammingLanguageRechnology);
             return result;

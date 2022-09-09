@@ -31,9 +31,10 @@ public sealed class DeleteProgrammingLanguageTechnologyCommand : IRequest<Delete
 
             ProgrammingLanguageTechnology? programmingLanguageTechnology = await _programmingLanguageTechnologyRepository.GetAsync(
                 p => p.Id == request.Id,
-                enableTracking: false);
+                enableTracking: false,
+                cancellationToken: cancellationToken);
 
-            ProgrammingLanguageTechnology deletedProgrammingLangaugeTechnology = await _programmingLanguageTechnologyRepository.DeleteAsync(programmingLanguageTechnology);
+            ProgrammingLanguageTechnology deletedProgrammingLangaugeTechnology = await _programmingLanguageTechnologyRepository.DeleteAsync(programmingLanguageTechnology, cancellationToken);
 
             DeletedProgrammingLanguageTechnologyDto result = _mapper.Map<DeletedProgrammingLanguageTechnologyDto>(deletedProgrammingLangaugeTechnology);
             return result;

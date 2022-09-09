@@ -32,10 +32,12 @@ public class UpdateProgrammingLanguageCommand : IRequest<UpdatedProgrammingLangu
             await _programmingLanguageRules
                 .ProgrammingLanguageShouldExistsWhenRequested(request.Id);
 
-            ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
+            ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(
+                p => p.Id == request.Id,
+                cancellationToken: cancellationToken);
 
             _mapper.Map(request, programmingLanguage);
-            ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(programmingLanguage);
+            ProgrammingLanguage updatedProgrammingLanguage = await _programmingLanguageRepository.UpdateAsync(programmingLanguage, cancellationToken);
 
             UpdatedProgrammingLanguageDto updatedProgrammingLanguageDto = _mapper.Map<UpdatedProgrammingLanguageDto>(updatedProgrammingLanguage);
             return updatedProgrammingLanguageDto;

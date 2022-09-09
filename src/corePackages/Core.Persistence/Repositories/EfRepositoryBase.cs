@@ -65,24 +65,24 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return Context.Set<TEntity>();
     }
 
-    public async Task<TEntity> AddAsync(TEntity entity)
+    public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         Context.Entry(entity).State = EntityState.Added;
-        await Context.SaveChangesAsync();
+        await Context.SaveChangesAsync(cancellationToken);
         return entity;
     }
 
-    public async Task<TEntity> UpdateAsync(TEntity entity)
+    public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         Context.Entry(entity).State = EntityState.Modified;
-        await Context.SaveChangesAsync();
+        await Context.SaveChangesAsync(cancellationToken);
         return entity;
     }
 
-    public async Task<TEntity> DeleteAsync(TEntity entity)
+    public async Task<TEntity> DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         Context.Entry(entity).State = EntityState.Deleted;
-        await Context.SaveChangesAsync();
+        await Context.SaveChangesAsync(cancellationToken);
         return entity;
     }
 
