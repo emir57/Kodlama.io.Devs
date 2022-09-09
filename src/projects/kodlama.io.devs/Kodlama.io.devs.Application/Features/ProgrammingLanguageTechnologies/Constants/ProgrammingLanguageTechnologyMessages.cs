@@ -2,4 +2,5 @@
 
 public sealed class ProgrammingLanguageTechnologyMessages
 {
+    public static readonly string ProgrammingLanguageTechnologyNotExists = "Programming language technology not exists";
 }

@@ -5,7 +5,7 @@ using Kodlama.io.devs.Domain.Entities;
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Rules;
 
-public class ProgrammingLanguageBusinessRules
+public sealed class ProgrammingLanguageBusinessRules
 {
     private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
 
