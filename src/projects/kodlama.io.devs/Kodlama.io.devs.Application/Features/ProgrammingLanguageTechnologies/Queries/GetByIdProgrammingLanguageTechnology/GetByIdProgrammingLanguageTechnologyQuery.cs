@@ -3,6 +3,7 @@ using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Dtos;
 using Kodlama.io.devs.Application.Services.Repositories;
 using Kodlama.io.devs.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Queries.GetByIdProgrammingLanguageTechnology;
 
@@ -24,7 +25,9 @@ public sealed class GetByIdProgrammingLanguageTechnologyQuery : IRequest<GetById
         public async Task<GetByIdProgrammingLanguageTechnologyDto> Handle(GetByIdProgrammingLanguageTechnologyQuery request, CancellationToken cancellationToken)
         {
             //todo: check null
-            ProgrammingLanguageTechnology programmingLanguageTechnology = await _rogrammingLanguageTechnologyRepository.GetAsync(p => p.Id == request.Id);
+            ProgrammingLanguageTechnology programmingLanguageTechnology = await _rogrammingLanguageTechnologyRepository.GetAsync(
+                p => p.Id == request.Id,
+                include: x => x.Include(p => p.ProgrammingLanguage));
 
             GetByIdProgrammingLanguageTechnologyDto result = _mapper.Map<GetByIdProgrammingLanguageTechnologyDto>(programmingLanguageTechnology);
             return result;
