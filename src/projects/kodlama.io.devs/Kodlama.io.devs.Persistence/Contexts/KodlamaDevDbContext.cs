@@ -1,6 +1,7 @@
 ﻿using Core.Persistence.Extensions;
 using Core.Persistence.Repositories;
 using Core.Security.Entities;
+using Core.Security.Hashing;
 using Kodlama.io.devs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -11,9 +12,11 @@ namespace Kodlama.io.devs.Persistence.Contexts;
 
 public class KodlamaDevDbContext : DbContext
 {
+    private readonly IConfigurationRoot _configuration;
     public KodlamaDevDbContext()
     {
-
+        _configuration = new ConfigurationManager()
+            .AddJsonFile("appsettings.json").Build();
     }
 
     public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
@@ -28,10 +31,8 @@ public class KodlamaDevDbContext : DbContext
     {
         optionsBuilder.EnableSensitiveDataLogging();
 
-        IConfigurationBuilder configurationBuilder = new ConfigurationManager()
-            .AddJsonFile("appsettings.json");
 
-        optionsBuilder.UseSqlServer(configurationBuilder.GetConnectionString("SqlServer"));
+        optionsBuilder.UseSqlServer(_configuration.GetConnectionString("SqlServer"));
     }
 
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -48,6 +49,10 @@ public class KodlamaDevDbContext : DbContext
 
         programmingLanguageEntityBuilder(modelBuilder);
         programmingLanguageTechnologyEntityBuilder(modelBuilder);
+
+        operationClaimEntityBuilder(modelBuilder);
+        userEntityBuilder(modelBuilder);
+        userOperationClaimEntityBuilder(modelBuilder);
     }
 
     private void programmingLanguageEntityBuilder(ModelBuilder modelBuilder)
@@ -71,5 +76,51 @@ public class KodlamaDevDbContext : DbContext
             new(5,"Vue",3,DateTime.Now)
         };
         modelBuilder.Entity<ProgrammingLanguageTechnology>().HasData(programmingLanguageTechnologyEntitySeeds);
+    }
+
+    private void operationClaimEntityBuilder(ModelBuilder builder)
+    {
+        OperationClaim[] operationClaimEntitySeeds =
+        {
+            new(1,"User"),new(2,"Admin")
+        };
+        builder.Entity<OperationClaim>().HasData(operationClaimEntitySeeds);
+    }
+    private void userEntityBuilder(ModelBuilder builder)
+    {
+        User user = getUser();
+
+        User[] userEntitySeeds =
+        {
+            user
+        };
+        builder.Entity<User>().HasData(userEntitySeeds);
+
+        User getUser()
+        {
+            byte[] passwordHash, passwordSalt;
+            string password = _configuration.GetSection("AdminUser:Password").ToString();
+            HashingHelper.CreatePasswordHash("", out passwordHash, out passwordSalt);
+            return new()
+            {
+                Id = 1,
+                FirstName = _configuration.GetSection("AdminUser:FirstName").ToString(),
+                LastName = _configuration.GetSection("AdminUser:LastName").ToString(),
+                Email = _configuration.GetSection("AdminUser:Email").ToString(),
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Status = true,
+                AuthenticatorType = Core.Security.Enums.AuthenticatorType.Email,
+                CreatedAt = DateTime.Now
+            };
+        }
+    }
+    private void userOperationClaimEntityBuilder(ModelBuilder builder)
+    {
+        UserOperationClaim[] userOperationClaimSeeds =
+        {
+            new(1,1,1),new(2,1,2)
+        };
+        builder.Entity<UserOperationClaim>().HasData(userOperationClaimSeeds);
     }
 }
