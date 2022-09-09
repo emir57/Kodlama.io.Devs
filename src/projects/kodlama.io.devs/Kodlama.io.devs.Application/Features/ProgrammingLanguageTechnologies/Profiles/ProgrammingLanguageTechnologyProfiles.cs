@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Persistence.Paging;
+using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Commands.CreateProgrammingLanguageTechnology;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Dtos;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Models;
 using Kodlama.io.devs.Domain.Entities;
@@ -10,6 +11,9 @@ public sealed class ProgrammingLanguageTechnologyProfiles : Profile
 {
     public ProgrammingLanguageTechnologyProfiles()
     {
+        CreateMap<ProgrammingLanguageTechnology, CreateProgrammingLanguageTechnologyCommand>().ReverseMap();
+        //CreateMap<ProgrammingLanguageTechnology, UpdateProgrammingLanguageTechnologyCommand>().ReverseMap();
+
         CreateMap<ProgrammingLanguageTechnology, CreatedProgrammingLanguageTechnologyDto>().ReverseMap();
         CreateMap<ProgrammingLanguageTechnology, UpdatedProgrammingLanguageTechnologyDto>().ReverseMap();
 

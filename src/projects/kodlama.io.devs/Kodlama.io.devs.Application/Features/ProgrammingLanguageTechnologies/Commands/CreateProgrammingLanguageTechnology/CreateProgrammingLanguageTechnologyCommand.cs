@@ -10,7 +10,7 @@ namespace Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.C
 public sealed class CreateProgrammingLanguageTechnologyCommand : IRequest<CreatedProgrammingLanguageTechnologyDto>
 {
     public string Name { get; set; }
-    public int ProgrammingLangaugeId { get; set; }
+    public int ProgrammingLanguageId { get; set; }
 
     public sealed class CreateProgrammingLangaugeTechnologyCommandHandler : IRequestHandler<CreateProgrammingLanguageTechnologyCommand, CreatedProgrammingLanguageTechnologyDto>
     {
@@ -28,7 +28,7 @@ public sealed class CreateProgrammingLanguageTechnologyCommand : IRequest<Create
         public async Task<CreatedProgrammingLanguageTechnologyDto> Handle(CreateProgrammingLanguageTechnologyCommand request, CancellationToken cancellationToken)
         {
             await _programmingLanguageTechnologyBusinessRules
-                .ProgrammingLanguageShouldExistsWhenProgrammingLanguageTechnologyInsertedOrUpdated(request.ProgrammingLangaugeId);
+                .ProgrammingLanguageShouldExistsWhenProgrammingLanguageTechnologyInsertedOrUpdated(request.ProgrammingLanguageId);
             
             await _programmingLanguageTechnologyBusinessRules
                 .ProgrammingLanguageTechnologyNameCannotBeDuplicatedWhenInsertedOrUpdated(request.Name);
