@@ -12,15 +12,26 @@ public static class ApplicationServiceRegistration
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+        #region AutoMapper
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        services.AddMediatR(Assembly.GetExecutingAssembly());
+        #endregion
 
+        #region MediatR
+        services.AddMediatR(Assembly.GetExecutingAssembly());
+        #endregion
+
+        #region BusinessRules
         services.AddScoped<ProgrammingLanguageBusinessRules>();
         services.AddScoped<ProgrammingLanguageTechnologyBusinessRules>();
+        #endregion
 
+        #region FluentValidation
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        #endregion
 
+        #region PiplineBehaviors
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+        #endregion
 
         return services;
     }
