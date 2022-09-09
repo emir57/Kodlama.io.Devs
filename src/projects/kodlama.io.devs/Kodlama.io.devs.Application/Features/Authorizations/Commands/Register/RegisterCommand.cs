@@ -2,6 +2,7 @@
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Dtos;
 using Core.Security.Entities;
+using Core.Security.Enums;
 using Core.Security.Hashing;
 using Core.Security.JWT;
 using Kodlama.io.devs.Application.Features.Authorizations.Commands.Login;
@@ -74,6 +75,7 @@ public sealed class RegisterCommand : IRequest<AccessToken>
                 user.Status = true;
                 user.PasswordHash = passwordHash;
                 user.PasswordSalt = passwordSalt;
+                user.AuthenticatorType = AuthenticatorType.Email;
             }
         }
     }
