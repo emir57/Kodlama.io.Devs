@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguageTechnologies\Commands\" />
-    <Folder Include="Features\ProgrammingLanguageTechnologies\Constants\" />
     <Folder Include="Features\ProgrammingLanguageTechnologies\Rules\" />
     <Folder Include="Features\ProgrammingLanguageTechnologies\Queries\" />
     <Folder Include="Features\ProgrammingLanguageTechnologies\Profiles\" />
