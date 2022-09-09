@@ -1,6 +1,6 @@
 ﻿namespace Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Dtos;
 
-public sealed class UpdateProgrammingLanguageTechnologyDto
+public sealed class UpdatedProgrammingLanguageTechnologyDto
 {
     public int Id { get; set; }
     public string Name { get; set; }

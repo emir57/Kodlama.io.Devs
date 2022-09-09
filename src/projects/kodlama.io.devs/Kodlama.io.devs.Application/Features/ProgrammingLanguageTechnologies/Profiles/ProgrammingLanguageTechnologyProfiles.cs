@@ -10,8 +10,8 @@ public sealed class ProgrammingLanguageTechnologyProfiles : Profile
 {
     public ProgrammingLanguageTechnologyProfiles()
     {
-        CreateMap<ProgrammingLanguageTechnology, CreateProgrammingLanguageTechnologyDto>().ReverseMap();
-        CreateMap<ProgrammingLanguageTechnology, UpdateProgrammingLanguageTechnologyDto>().ReverseMap();
+        CreateMap<ProgrammingLanguageTechnology, CreatedProgrammingLanguageTechnologyDto>().ReverseMap();
+        CreateMap<ProgrammingLanguageTechnology, UpdatedProgrammingLanguageTechnologyDto>().ReverseMap();
 
         CreateMap<IPaginate<ProgrammingLanguageTechnology>, ProgrammingLanguageTechnologyListModel>().ReverseMap();
 

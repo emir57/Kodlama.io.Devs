@@ -1,4 +1,5 @@
 ﻿using Core.Application.Requests;
+using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Commands.CreateProgrammingLanguageTechnology;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Dtos;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Models;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Queries.GetByIdProgrammingLanguageTechnology;
@@ -23,6 +24,13 @@ namespace Kodlama.io.devs.WebAPI.Controllers
         public async Task<IActionResult> Get([FromRoute] GetByIdProgrammingLanguageTechnologyQuery request)
         {
             GetByIdProgrammingLanguageTechnologyDto result = await Mediator.Send(request);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CreateProgrammingLanguageTechnologyCommand request)
+        {
+            CreatedProgrammingLanguageTechnologyDto result = await Mediator.Send(request);
             return Ok(result);
         }
     }
