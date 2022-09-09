@@ -19,4 +19,12 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\ProgrammingLanguageTechnologies\Commands\" />
+    <Folder Include="Features\ProgrammingLanguageTechnologies\Constants\" />
+    <Folder Include="Features\ProgrammingLanguageTechnologies\Rules\" />
+    <Folder Include="Features\ProgrammingLanguageTechnologies\Queries\" />
+    <Folder Include="Features\ProgrammingLanguageTechnologies\Profiles\" />
+  </ItemGroup>
+
 </Project>
