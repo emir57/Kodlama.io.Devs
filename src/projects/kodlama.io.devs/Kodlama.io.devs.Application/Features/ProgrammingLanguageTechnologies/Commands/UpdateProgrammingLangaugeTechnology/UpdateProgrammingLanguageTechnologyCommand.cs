@@ -11,7 +11,7 @@ public sealed class UpdateProgrammingLanguageTechnologyCommand : IRequest<Update
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public int ProgrammingLangaugeId { get; set; }
+    public int ProgrammingLanguageId { get; set; }
 
     public sealed class UpdateProgrammingLanguageTechnologyCommandHandler : IRequestHandler<UpdateProgrammingLanguageTechnologyCommand, UpdatedProgrammingLanguageTechnologyDto>
     {
@@ -35,7 +35,7 @@ public sealed class UpdateProgrammingLanguageTechnologyCommand : IRequest<Update
                 .ProgrammingLanguageTechnologyNameCannotBeDuplicatedWhenInsertedOrUpdated(request.Name);
 
             await _programmingLanguageTechnologyBusinessRules
-                .ProgrammingLanguageShouldExistsWhenProgrammingLanguageTechnologyInsertedOrUpdated(request.ProgrammingLangaugeId);
+                .ProgrammingLanguageShouldExistsWhenProgrammingLanguageTechnologyInsertedOrUpdated(request.ProgrammingLanguageId);
 
             ProgrammingLanguageTechnology? programmingLanguageTechnology = await _programmingLanguageTechnologyRepository.GetAsync(
                 p => p.Id == request.Id,
