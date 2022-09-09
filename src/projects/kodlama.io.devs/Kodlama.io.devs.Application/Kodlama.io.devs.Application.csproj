@@ -22,7 +22,6 @@
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguageTechnologies\Commands\" />
     <Folder Include="Features\ProgrammingLanguageTechnologies\Rules\" />
-    <Folder Include="Features\ProgrammingLanguageTechnologies\Queries\" />
   </ItemGroup>
 
 </Project>
