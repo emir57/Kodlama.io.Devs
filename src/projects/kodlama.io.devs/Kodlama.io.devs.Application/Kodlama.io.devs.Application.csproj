@@ -19,4 +19,11 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Authorizations\Constants\" />
+    <Folder Include="Features\Authorizations\Dtos\" />
+    <Folder Include="Features\Authorizations\Rules\" />
+    <Folder Include="Features\Authorizations\Profiles\" />
+  </ItemGroup>
+
 </Project>
