@@ -32,17 +32,23 @@ public sealed class LoginCommand : IRequest<AccessToken>
             await _authorizationBusinessRules
                 .UserShouldExistsWhenLoginOrRegister(request.UserForLoginDto.Email);
 
-            User? user = await _userRepository.GetAsync(u => u.Email == request.UserForLoginDto.Email);
+            User? user = await _userRepository.GetAsync(u => u.Email.ToLower() == request.UserForLoginDto.Email.ToLower());
 
             _authorizationBusinessRules.VerifyPassword(request.UserForLoginDto, user);
 
-            List<OperationClaim> operationClaims = user.UserOperationClaims.Select(uoc => new OperationClaim
-            {
-                Name = uoc.OperationClaim.Name
-            }).ToList();
+            List<OperationClaim> operationClaims = userOperationClaims(user).ToList();
 
             AccessToken accessToken = _tokenHelper.CreateToken(user, operationClaims);
             return accessToken;
+        }
+
+        private IEnumerable<OperationClaim> userOperationClaims(User user)
+        {
+            foreach (UserOperationClaim userOperationClaim in user.UserOperationClaims)
+                yield return new OperationClaim()
+                {
+                    Name = userOperationClaim.OperationClaim.Name
+                };
         }
     }
 }
