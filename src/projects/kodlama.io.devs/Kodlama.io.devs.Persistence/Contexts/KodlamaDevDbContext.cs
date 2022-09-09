@@ -18,6 +18,8 @@ public class KodlamaDevDbContext : DbContext
     public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
     public DbSet<ProgrammingLanguageTechnology> ProgrammingLanguageTechnologies { get; set; }
 
+
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.EnableSensitiveDataLogging();
