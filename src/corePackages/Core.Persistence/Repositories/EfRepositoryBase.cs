@@ -18,9 +18,11 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     }
 
     public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate,
-                                        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include)
+                                        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include,
+                                        bool enableTracking = true)
     {
         IQueryable<TEntity> queryable = Context.Set<TEntity>().AsQueryable();
+        if (enableTracking == false) queryable = queryable.AsNoTracking();
         if (include != null) queryable = include(queryable);
 
         return await queryable.FirstOrDefaultAsync(predicate);
