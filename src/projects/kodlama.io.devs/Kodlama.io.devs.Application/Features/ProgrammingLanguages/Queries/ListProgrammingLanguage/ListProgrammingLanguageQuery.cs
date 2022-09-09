@@ -25,8 +25,9 @@ public class ListProgrammingLanguageQuery : IRequest<ProgrammingLanguageListMode
         public async Task<ProgrammingLanguageListModel> Handle(ListProgrammingLanguageQuery request, CancellationToken cancellationToken)
         {
             IPaginate<ProgrammingLanguage> paginate = await _programmingLanguageRepository.GetListAsync(
-                index: request.PageRequest.Page,
-                size: request.PageRequest.PageSize);
+                index: request.PageRequest.Page, size: request.PageRequest.PageSize,
+                enableTracking: false,
+                cancellationToken: cancellationToken);
 
             ProgrammingLanguageListModel programmingLanguageListModel = _mapper.Map<ProgrammingLanguageListModel>(paginate);
             return programmingLanguageListModel;

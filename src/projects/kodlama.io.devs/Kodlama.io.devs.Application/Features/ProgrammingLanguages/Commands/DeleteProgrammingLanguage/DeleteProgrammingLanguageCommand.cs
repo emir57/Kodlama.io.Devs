@@ -29,7 +29,8 @@ public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLangu
             await _programmingLanguageRules
                 .ProgrammingLanguageShouldExistsWhenRequested(request.Id);
 
-            ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
+            ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id,
+                cancellationToken: cancellationToken);
 
             ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageRepository.DeleteAsync(programmingLanguage);
 

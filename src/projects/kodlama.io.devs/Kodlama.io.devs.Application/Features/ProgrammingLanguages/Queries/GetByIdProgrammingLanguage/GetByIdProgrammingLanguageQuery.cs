@@ -29,7 +29,9 @@ public class GetByIdProgrammingLanguageQuery : IRequest<GetByIdProgrammingLangua
             await _programmingLanguageRules
                 .ProgrammingLanguageShouldExistsWhenRequested(request.Id);
 
-            ProgrammingLanguage programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id);
+            ProgrammingLanguage? programmingLanguage = await _programmingLanguageRepository.GetAsync(p => p.Id == request.Id,
+                enableTracking: false,
+                cancellationToken: cancellationToken);
 
             GetByIdProgrammingLanguageDto getByIdProgrammingLanguageDto = _mapper.Map<GetByIdProgrammingLanguageDto>(programmingLanguage);
             return getByIdProgrammingLanguageDto;

@@ -27,7 +27,9 @@ public sealed class ListProgrammingLanguageTechnologyQuery : IRequest<Programmin
         {
             IPaginate<ProgrammingLanguageTechnology> paginate = await _programmingLanguageTechnologyRepository.GetListAsync(
                 include: x => x.Include(x => x.ProgrammingLanguage),
-                index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+                index: request.PageRequest.Page, size: request.PageRequest.PageSize,
+                enableTracking: false,
+                cancellationToken: cancellationToken);
 
             ProgrammingLanguageTechnologyListModel result = _mapper.Map<ProgrammingLanguageTechnologyListModel>(paginate);
             return result;

@@ -25,9 +25,11 @@ public sealed class GetByIdProgrammingLanguageTechnologyQuery : IRequest<GetById
         public async Task<GetByIdProgrammingLanguageTechnologyDto> Handle(GetByIdProgrammingLanguageTechnologyQuery request, CancellationToken cancellationToken)
         {
             //todo: check null
-            ProgrammingLanguageTechnology programmingLanguageTechnology = await _rogrammingLanguageTechnologyRepository.GetAsync(
+            ProgrammingLanguageTechnology? programmingLanguageTechnology = await _rogrammingLanguageTechnologyRepository.GetAsync(
                 p => p.Id == request.Id,
-                include: x => x.Include(p => p.ProgrammingLanguage), enableTracking: false);
+                include: x => x.Include(p => p.ProgrammingLanguage),
+                enableTracking: false,
+                cancellationToken: cancellationToken);
 
             GetByIdProgrammingLanguageTechnologyDto result = _mapper.Map<GetByIdProgrammingLanguageTechnologyDto>(programmingLanguageTechnology);
             return result;
