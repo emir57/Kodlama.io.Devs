@@ -25,7 +25,7 @@ namespace Kodlama.io.devs.WebAPI.Controllers
         {
             RegisterCommand request = new() { UserForRegisterDto = userForRegisterDto };
             AccessToken result = await Mediator.Send(request);
-            return Ok(request);
+            return Ok(result);
         }
     }
 }

@@ -34,19 +34,21 @@ public sealed class RegisterCommand : IRequest<AccessToken>
         {
             await _authorizationBusinessRules
                 .UserShouldNotExistsWhenRegister(request.UserForRegisterDto.Email);
-
+            User user = new();
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(request.UserForRegisterDto.Password, out passwordHash, out passwordSalt);
 
-            User user = _mapper.Map<User>(request.UserForRegisterDto);
+            _mapper.Map(request.UserForRegisterDto, user);
             user.Status = true;
-            user.UserOperationClaims.Add(new UserOperationClaim { Id = 1 });
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
             User addedUser = await _userRepository.AddAsync(user, cancellationToken);
             if (addedUser == null)
                 throw new BusinessException("");
+
+            addedUser.UserOperationClaims.Add(new UserOperationClaim { UserId = addedUser.Id, OperationClaimId = 1 });
+            await _userRepository.UpdateAsync(addedUser);
 
             UserForLoginDto userForLoginDto = _mapper.Map<UserForLoginDto>(request.UserForRegisterDto);
             LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto };

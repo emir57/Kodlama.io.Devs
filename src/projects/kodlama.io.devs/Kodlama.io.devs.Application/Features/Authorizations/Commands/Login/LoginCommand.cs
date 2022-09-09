@@ -5,6 +5,7 @@ using Core.Security.JWT;
 using Kodlama.io.devs.Application.Features.Authorizations.Rules;
 using Kodlama.io.devs.Application.Services.Repositories;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kodlama.io.devs.Application.Features.Authorizations.Commands.Login;
 
@@ -32,7 +33,10 @@ public sealed class LoginCommand : IRequest<AccessToken>
             await _authorizationBusinessRules
                 .UserShouldExistsWhenLogin(request.UserForLoginDto.Email);
 
-            User? user = await _userRepository.GetAsync(u => u.Email.ToLower() == request.UserForLoginDto.Email.ToLower());
+            User? user = await _userRepository.GetAsync(
+                u => u.Email.ToLower() == request.UserForLoginDto.Email.ToLower(),
+                include: x => x.Include(u => u.UserOperationClaims)
+                               .ThenInclude(u => u.OperationClaim));
 
             _authorizationBusinessRules.VerifyPassword(request.UserForLoginDto, user);
 
