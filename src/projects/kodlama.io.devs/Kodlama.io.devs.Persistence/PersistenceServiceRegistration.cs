@@ -9,10 +9,14 @@ public static class PersistenceServiceRegistration
 {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services)
     {
+        #region Context
         services.AddDbContext<KodlamaDevDbContext>();
+        #endregion
 
+        #region Repositories
         services.AddScoped<IProgrammingLanguageRepository, ProgrammingLanguageRepository>();
         services.AddScoped<IProgrammingLanguageTechnologyRepository, ProgrammingLanguageTechnologyRepository>();
+        #endregion
 
         return services;
     }
