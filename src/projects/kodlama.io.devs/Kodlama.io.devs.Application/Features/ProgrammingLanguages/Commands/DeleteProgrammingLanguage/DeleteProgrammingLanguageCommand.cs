@@ -7,11 +7,11 @@ using MediatR;
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
 
-public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageDto>
+public sealed class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLanguageDto>
 {
     public int Id { get; set; }
 
-    public class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageDto>
+    public sealed class DeleteProgrammingLanguageCommandHandler : IRequestHandler<DeleteProgrammingLanguageCommand, DeletedProgrammingLanguageDto>
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;

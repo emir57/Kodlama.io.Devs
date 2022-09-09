@@ -7,11 +7,11 @@ using MediatR;
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 
-public class GetByIdProgrammingLanguageQuery : IRequest<GetByIdProgrammingLanguageDto>
+public sealed class GetByIdProgrammingLanguageQuery : IRequest<GetByIdProgrammingLanguageDto>
 {
     public int Id { get; set; }
 
-    public class GetByIdProgrammingLanguageQueryHandler : IRequestHandler<GetByIdProgrammingLanguageQuery, GetByIdProgrammingLanguageDto>
+    public sealed class GetByIdProgrammingLanguageQueryHandler : IRequestHandler<GetByIdProgrammingLanguageQuery, GetByIdProgrammingLanguageDto>
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;

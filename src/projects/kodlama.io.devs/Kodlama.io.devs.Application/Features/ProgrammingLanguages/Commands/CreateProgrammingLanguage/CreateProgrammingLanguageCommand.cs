@@ -7,11 +7,11 @@ using MediatR;
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
 
-public class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageDto>
+public sealed class CreateProgrammingLanguageCommand : IRequest<CreatedProgrammingLanguageDto>
 {
     public string Name { get; set; }
 
-    public class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, CreatedProgrammingLanguageDto>
+    public sealed class CreateProgrammingLanguageCommandHandler : IRequestHandler<CreateProgrammingLanguageCommand, CreatedProgrammingLanguageDto>
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;

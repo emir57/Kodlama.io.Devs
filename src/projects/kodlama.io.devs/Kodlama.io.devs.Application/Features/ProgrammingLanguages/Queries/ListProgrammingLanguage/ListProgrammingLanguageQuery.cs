@@ -8,10 +8,10 @@ using MediatR;
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Queries.ListProgrammingLanguage;
 
-public class ListProgrammingLanguageQuery : IRequest<ProgrammingLanguageListModel>
+public sealed class ListProgrammingLanguageQuery : IRequest<ProgrammingLanguageListModel>
 {
     public PageRequest PageRequest { get; set; }
-    public class ListProgrammingLanguageQueryHandler : IRequestHandler<ListProgrammingLanguageQuery, ProgrammingLanguageListModel>
+    public sealed class ListProgrammingLanguageQueryHandler : IRequestHandler<ListProgrammingLanguageQuery, ProgrammingLanguageListModel>
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;

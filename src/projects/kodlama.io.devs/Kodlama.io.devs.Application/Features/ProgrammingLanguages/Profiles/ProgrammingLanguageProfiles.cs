@@ -9,7 +9,7 @@ using Kodlama.io.devs.Domain.Entities;
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Profiles;
 
-public class ProgrammingLanguageProfiles : Profile
+public sealed class ProgrammingLanguageProfiles : Profile
 {
     public ProgrammingLanguageProfiles()
     {

@@ -2,7 +2,7 @@
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 
-public class UpdateProgrammingLanguageCommandValidator : AbstractValidator<UpdateProgrammingLanguageCommand>
+public sealed class UpdateProgrammingLanguageCommandValidator : AbstractValidator<UpdateProgrammingLanguageCommand>
 {
     public UpdateProgrammingLanguageCommandValidator()
     {

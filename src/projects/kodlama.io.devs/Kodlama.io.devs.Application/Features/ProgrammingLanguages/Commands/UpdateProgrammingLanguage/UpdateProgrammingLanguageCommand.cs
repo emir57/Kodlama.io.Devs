@@ -7,12 +7,12 @@ using MediatR;
 
 namespace Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 
-public class UpdateProgrammingLanguageCommand : IRequest<UpdatedProgrammingLanguageDto>
+public sealed class UpdateProgrammingLanguageCommand : IRequest<UpdatedProgrammingLanguageDto>
 {
     public int Id { get; set; }
     public string Name { get; set; }
 
-    public class UpdateProgrammingLanguageCommandHandler : IRequestHandler<UpdateProgrammingLanguageCommand, UpdatedProgrammingLanguageDto>
+    public sealed class UpdateProgrammingLanguageCommandHandler : IRequestHandler<UpdateProgrammingLanguageCommand, UpdatedProgrammingLanguageDto>
     {
         private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
         private readonly IMapper _mapper;
