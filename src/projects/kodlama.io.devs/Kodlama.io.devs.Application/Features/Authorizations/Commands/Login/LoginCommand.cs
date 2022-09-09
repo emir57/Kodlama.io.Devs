@@ -30,7 +30,7 @@ public sealed class LoginCommand : IRequest<AccessToken>
         public async Task<AccessToken> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             await _authorizationBusinessRules
-                .UserShouldExistsWhenLoginOrRegister(request.UserForLoginDto.Email);
+                .UserShouldExistsWhenLogin(request.UserForLoginDto.Email);
 
             User? user = await _userRepository.GetAsync(u => u.Email.ToLower() == request.UserForLoginDto.Email.ToLower());
 

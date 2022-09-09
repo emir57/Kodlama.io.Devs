@@ -33,12 +33,12 @@ public sealed class RegisterCommand : IRequest<AccessToken>
         public async Task<AccessToken> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             await _authorizationBusinessRules
-                .UserShouldNotExistsWhenRegister(request.userForRegisterDto.Email);
+                .UserShouldNotExistsWhenRegister(request.UserForRegisterDto.Email);
 
             byte[] passwordHash, passwordSalt;
-            HashingHelper.CreatePasswordHash(request.userForRegisterDto.Password, out passwordHash, out passwordSalt);
+            HashingHelper.CreatePasswordHash(request.UserForRegisterDto.Password, out passwordHash, out passwordSalt);
 
-            User user = _mapper.Map<User>(request.userForRegisterDto);
+            User user = _mapper.Map<User>(request.UserForRegisterDto);
             user.Status = true;
             user.UserOperationClaims.Add(new UserOperationClaim { Id = 1 });
             user.PasswordHash = passwordHash;
@@ -48,7 +48,7 @@ public sealed class RegisterCommand : IRequest<AccessToken>
             if (addedUser == null)
                 throw new BusinessException("");
 
-            UserForLoginDto userForLoginDto = _mapper.Map<UserForLoginDto>(request.userForRegisterDto);
+            UserForLoginDto userForLoginDto = _mapper.Map<UserForLoginDto>(request.UserForRegisterDto);
             LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto };
 
             AccessToken accessToken = await _mediator.Send(loginCommand, cancellationToken);
