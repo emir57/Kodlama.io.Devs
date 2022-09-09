@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Features\ProgrammingLanguageTechnologies\Commands\DeleteProgrammingLangaugeTechnology\" />
-    <Folder Include="Features\ProgrammingLanguageTechnologies\Commands\UpdateProgrammingLangaugeTechnology\" />
   </ItemGroup>
 
 </Project>
