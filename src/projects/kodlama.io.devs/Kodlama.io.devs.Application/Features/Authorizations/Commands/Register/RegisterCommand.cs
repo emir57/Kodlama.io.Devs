@@ -34,27 +34,47 @@ public sealed class RegisterCommand : IRequest<AccessToken>
         {
             await _authorizationBusinessRules
                 .UserShouldNotExistsWhenRegister(request.UserForRegisterDto.Email);
-            User user = new();
-            byte[] passwordHash, passwordSalt;
-            HashingHelper.CreatePasswordHash(request.UserForRegisterDto.Password, out passwordHash, out passwordSalt);
 
-            _mapper.Map(request.UserForRegisterDto, user);
-            user.Status = true;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
-            User addedUser = await _userRepository.AddAsync(user, cancellationToken);
-            if (addedUser == null)
-                throw new BusinessException("");
-
-            addedUser.UserOperationClaims.Add(new UserOperationClaim { UserId = addedUser.Id, OperationClaimId = 1 });
-            await _userRepository.UpdateAsync(addedUser);
+            await addUserAsync(request.UserForRegisterDto, cancellationToken);
 
             UserForLoginDto userForLoginDto = _mapper.Map<UserForLoginDto>(request.UserForRegisterDto);
             LoginCommand loginCommand = new() { UserForLoginDto = userForLoginDto };
 
             AccessToken accessToken = await _mediator.Send(loginCommand, cancellationToken);
             return accessToken;
+        }
+
+        private async Task<User> addUserAsync(UserForRegisterDto userForRegisterDto, CancellationToken cancellationToken = default)
+        {
+            User user = new();
+            setPassword(userForRegisterDto, out user);
+
+            User addedUser = await _userRepository.AddAsync(user, cancellationToken);
+
+            User updatedUser = await addUserRoleAsync(addedUser, cancellationToken);
+            return updatedUser;
+
+            async Task<User> addUserRoleAsync(User user, CancellationToken cancellationToken = default)
+            {
+                user.UserOperationClaims.Add(new UserOperationClaim
+                {
+                    UserId = user.Id,
+                    OperationClaimId = 1
+                });
+
+                User updatedUser = await _userRepository.UpdateAsync(user, cancellationToken);
+                return updatedUser;
+            }
+            void setPassword(UserForRegisterDto userForRegisterDto, out User user)
+            {
+                byte[] passwordHash, passwordSalt;
+                HashingHelper.CreatePasswordHash(userForRegisterDto.Password, out passwordHash, out passwordSalt);
+
+                user = _mapper.Map<User>(userForRegisterDto);
+                user.Status = true;
+                user.PasswordHash = passwordHash;
+                user.PasswordSalt = passwordSalt;
+            }
         }
     }
 }
