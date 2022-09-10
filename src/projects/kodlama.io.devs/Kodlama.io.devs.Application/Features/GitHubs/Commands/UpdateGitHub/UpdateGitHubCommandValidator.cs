@@ -12,14 +12,14 @@ public sealed class UpdateGitHubCommandValidator : AbstractValidator<UpdateGitHu
         RuleFor(u => u.Id)
             .GreaterThan(0);
 
-        RuleFor(c => c.ProfileUserName)
+        RuleFor(u => u.ProfileUserName)
             .NotEmpty()
             .NotNull();
 
-        RuleFor(c => c.ProfileUserName)
+        RuleFor(u => u.ProfileUserName)
             .MinimumLength(1);
 
-        RuleFor(c => c.ProfileUserName)
+        RuleFor(u => u.ProfileUserName)
             .MaximumLength(50);
     }
 }
