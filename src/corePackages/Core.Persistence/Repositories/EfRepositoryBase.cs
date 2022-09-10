@@ -22,7 +22,7 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
                                         bool enableTracking = true,
                                         CancellationToken cancellationToken = default)
     {
-        IQueryable<TEntity> queryable = Context.Set<TEntity>().AsQueryable();
+        IQueryable<TEntity> queryable = Query().AsQueryable();
         if (enableTracking == false) queryable = queryable.AsNoTracking();
         if (include != null) queryable = include(queryable);
 
@@ -62,7 +62,7 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
 
     public IQueryable<TEntity> Query()
     {
-        return Context.Set<TEntity>();
+        return Context.Set<TEntity>().Where(x => x.DeletedAt.HasValue);
     }
 
     public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
