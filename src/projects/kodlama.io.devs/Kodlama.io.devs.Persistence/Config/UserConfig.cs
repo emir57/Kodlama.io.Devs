@@ -13,7 +13,7 @@ public class UserConfig : IEntityTypeConfiguration<User>
 
         builder.HasMany(u => u.RefreshTokens);
         builder.HasMany(u => u.UserOperationClaims);
-        builder.HasOne(u => u.GitHub);
+        //builder.HasOne(u => u.GitHub);
 
         builder.Property(p => p.Id)
             .HasColumnName("Id");

@@ -1,4 +1,4 @@
-﻿using Core.Security.Entities;
+﻿using Kodlama.io.devs.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

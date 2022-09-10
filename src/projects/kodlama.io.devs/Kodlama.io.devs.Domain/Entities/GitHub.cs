@@ -1,6 +1,7 @@
 ﻿using Core.Persistence.Repositories;
+using Core.Security.Entities;
 
-namespace Core.Security.Entities;
+namespace Kodlama.io.devs.Domain.Entities;
 
 public sealed class GitHub : Entity
 {

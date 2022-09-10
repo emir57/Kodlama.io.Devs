@@ -1,9 +1,12 @@
-﻿using Core.Application.Pipelines.Validation;
+﻿using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using Kodlama.io.devs.Application.Features.Authorizations.Rules;
+using Kodlama.io.devs.Application.Features.GitHubs.Rules;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Rules;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -25,6 +28,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ProgrammingLanguageBusinessRules>();
         services.AddScoped<ProgrammingLanguageTechnologyBusinessRules>();
         services.AddScoped<AuthorizationBusinessRules>();
+        services.AddScoped<GitHubBusinessRules>();
         #endregion
 
         #region FluentValidation
@@ -33,7 +37,10 @@ public static class ApplicationServiceRegistration
 
         #region PiplineBehaviors
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
         #endregion
+
+
 
         return services;
     }
