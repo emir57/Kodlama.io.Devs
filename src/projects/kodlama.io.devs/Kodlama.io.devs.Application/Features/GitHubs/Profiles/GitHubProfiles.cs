@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Kodlama.io.devs.Application.Features.GitHubs.Commands.CreateGitHub;
+using Kodlama.io.devs.Application.Features.GitHubs.Commands.DeleteGitHub;
 using Kodlama.io.devs.Application.Features.GitHubs.Commands.UpdateGitHub;
 using Kodlama.io.devs.Application.Features.GitHubs.Dtos;
 using Kodlama.io.devs.Domain.Entities;
@@ -17,9 +18,11 @@ public sealed class GitHubProfiles : Profile
             .ForMember(x => x.CreatedAt, opt => opt.Ignore())
             .ForMember(x => x.UpdatedAt, opt => opt.Ignore())
             .ForMember(x => x.DeletedAt, opt => opt.Ignore());
+        CreateMap<GitHub, DeleteGitHubCommand>();
 
 
         CreateMap<GitHub, UpdatedGitHubDto>().ReverseMap();
         CreateMap<GitHub, CreatedGitHubDto>().ReverseMap();
+        CreateMap<GitHub, DeletedGitHubDto>().ReverseMap();
     }
 }
