@@ -38,6 +38,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddPersistenceServices();
 builder.Services.AddApplicationServices();
 builder.Services.AddSecurityServices();
+builder.Services.AddHttpContextAccessor();
 #endregion
 
 var app = builder.Build();

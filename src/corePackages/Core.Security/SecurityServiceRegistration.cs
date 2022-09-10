@@ -15,8 +15,6 @@ public static class SecurityServiceRegistration
         services.AddScoped<ITokenHelper, JwtHelper>();
         services.AddScoped<IEmailAuthenticatorHelper, EmailAuthenticatorHelper>();
         services.AddScoped<IOtpAuthenticatorHelper, OtpNetOtpAuthenticatorHelper>();
-
-        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         return services;
     }
 }
