@@ -14,6 +14,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
+#region Registrations
+
+builder.Services.AddPersistenceServices();
+builder.Services.AddApplicationServices();
+builder.Services.AddSecurityServices();
+builder.Services.AddHttpContextAccessor();
+#endregion
 #region JWT
 TokenOptions tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -31,14 +40,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
         };
     });
-#endregion
-
-#region Registrations
-
-builder.Services.AddPersistenceServices();
-builder.Services.AddApplicationServices();
-builder.Services.AddSecurityServices();
-builder.Services.AddHttpContextAccessor();
 #endregion
 
 var app = builder.Build();

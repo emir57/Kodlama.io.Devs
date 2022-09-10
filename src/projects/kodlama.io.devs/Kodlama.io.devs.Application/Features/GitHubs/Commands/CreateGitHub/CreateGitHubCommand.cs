@@ -22,6 +22,7 @@ namespace Kodlama.io.devs.Application.Features.GitHubs.Commands.CreateGitHub
             private readonly IMapper _mapper;
             private readonly GitHubBusinessRules _gitHubBusinessRules;
             private readonly IHttpContextAccessor _httpContextAccessor;
+            private readonly int _userId;
 
             public CreateGitHubCommandHandler(IGitHubRepository gitHubRepository, IMapper mapper, GitHubBusinessRules gitHubBusinessRules, IHttpContextAccessor httpContextAccessor)
             {
@@ -29,19 +30,18 @@ namespace Kodlama.io.devs.Application.Features.GitHubs.Commands.CreateGitHub
                 _mapper = mapper;
                 _gitHubBusinessRules = gitHubBusinessRules;
                 _httpContextAccessor = httpContextAccessor;
+                _userId = _httpContextAccessor.HttpContext.User.GetUserId();
             }
 
             public async Task<CreatedGitHubDto> Handle(CreateGitHubCommand request, CancellationToken cancellationToken)
             {
-                int userId = _httpContextAccessor.HttpContext.User.GetUserId();
-
                 await _gitHubBusinessRules
-                    .GitHubUserIdCannotBeDuplicateWhenInserted(userId);
+                    .GitHubUserIdCannotBeDuplicateWhenInserted(_userId);
                 await _gitHubBusinessRules
                     .GitHubProfileNameCannotBeDuplicateWhenInserted(request.ProfileUserName);
 
                 GitHub mappedGitHubEntity = _mapper.Map<GitHub>(request);
-                mappedGitHubEntity.UserId = userId;
+                mappedGitHubEntity.UserId = _userId;
 
                 GitHub addedGitHub = await _gitHubRepository.AddAsync(mappedGitHubEntity);
 
