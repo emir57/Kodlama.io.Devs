@@ -2,6 +2,7 @@
 using Kodlama.io.devs.Application.Features.GitHubs.Commands.DeleteGitHub;
 using Kodlama.io.devs.Application.Features.GitHubs.Commands.UpdateGitHub;
 using Kodlama.io.devs.Application.Features.GitHubs.Dtos;
+using Kodlama.io.devs.Application.Features.GitHubs.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.devs.WebAPI.Controllers;
@@ -10,6 +11,14 @@ namespace Kodlama.io.devs.WebAPI.Controllers;
 [Route("api/[controller]")]
 public class GitHubsController : BaseController
 {
+    [HttpGet]
+    public async Task<IActionResult> GetByUser()
+    {
+        GetByUserIdGitHubQuery request = new();
+        GetByUserIdGitHubDto result = await Mediator.Send(request);
+        return Ok(result);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CreateGitHubCommand createGitHubCommand)
     {
