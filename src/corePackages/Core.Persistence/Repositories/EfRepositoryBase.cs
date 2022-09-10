@@ -131,9 +131,48 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
-    public TEntity Delete(TEntity entity)
+    public TEntity HardDelete(TEntity entity)
     {
         Context.Entry(entity).State = EntityState.Deleted;
+        Context.SaveChanges();
+        return entity;
+    }
+
+    public async Task<TEntity> HardDeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+    {
+        Context.Entry(entity).State = EntityState.Deleted;
+        await Context.SaveChangesAsync(cancellationToken);
+        return entity;
+    }
+
+    public async Task<TEntity> SoftDeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+    {
+        entity.DeletedAt = DateTime.Now;
+        Context.Entry(entity).State = EntityState.Modified;
+        await Context.SaveChangesAsync();
+        return entity;
+    }
+
+    public async Task<TEntity> UndoDeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+    {
+        entity.DeletedAt = null;
+        Context.Entry(entity).State = EntityState.Modified;
+        await Context.SaveChangesAsync();
+        return entity;
+    }
+
+    public TEntity SoftDelete(TEntity entity)
+    {
+        entity.DeletedAt = DateTime.Now;
+        Context.Entry(entity).State = EntityState.Modified;
+        Context.SaveChanges();
+        return entity;
+    }
+
+    public TEntity UndoDelete(TEntity entity)
+    {
+        entity.DeletedAt = null;
+        Context.Entry(entity).State = EntityState.Modified;
         Context.SaveChanges();
         return entity;
     }
