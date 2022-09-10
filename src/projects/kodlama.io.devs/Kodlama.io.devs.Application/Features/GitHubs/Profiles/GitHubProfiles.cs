@@ -25,7 +25,7 @@ public sealed class GitHubProfiles : Profile
         CreateMap<GitHub, CreatedGitHubDto>().ReverseMap();
         CreateMap<GitHub, DeletedGitHubDto>().ReverseMap();
 
-        CreateMap<GitHub, GetByUserIdGitHubDto>()
+        CreateMap<GitHub, GetByUserGitHubDto>()
             .ForMember(x => x.UserFullName, opt => opt.MapFrom(g => $"{g.User.FirstName} {g.User.LastName}"))
             .ForMember(x => x.UserEmail, opt => opt.MapFrom(g => g.User.Email))
             .ReverseMap();

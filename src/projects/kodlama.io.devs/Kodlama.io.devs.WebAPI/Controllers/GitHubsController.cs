@@ -14,8 +14,8 @@ public class GitHubsController : BaseController
     [HttpGet]
     public async Task<IActionResult> GetByUser()
     {
-        GetByUserIdGitHubQuery request = new();
-        GetByUserIdGitHubDto result = await Mediator.Send(request);
+        GetByUserGitHubQuery request = new();
+        GetByUserGitHubDto result = await Mediator.Send(request);
         return Ok(result);
     }
 

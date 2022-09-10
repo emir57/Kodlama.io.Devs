@@ -1,6 +1,6 @@
 ﻿namespace Kodlama.io.devs.Application.Features.GitHubs.Dtos;
 
-public sealed class GetByUserIdGitHubDto
+public sealed class GetByUserGitHubDto
 {
     public int Id { get; set; }
     public string ProfileUserName { get; set; }
