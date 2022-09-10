@@ -31,5 +31,14 @@ namespace Kodlama.io.devs.Application.Features.GitHubs.Rules
                 throw new BusinessException(GitHubMessages.GitHubUserIdCannotBeDuplicated);
         }
 
+        public async Task GitHubShouldExistsWhenRequested(int id)
+        {
+            GitHub? gitHub = await _gitHubRepository.GetAsync(
+                x => x.Id == id,
+                enableTracking: false);
+            if (gitHub == null)
+                throw new BusinessException(GitHubMessages.GitHubNotExists);
+        }
+
     }
 }

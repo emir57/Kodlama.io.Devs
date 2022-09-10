@@ -22,7 +22,6 @@
   <ItemGroup>
     <Folder Include="Features\Authorizations\Dtos\" />
     <Folder Include="Features\GitHubs\Commands\DeleteGitHub\" />
-    <Folder Include="Features\GitHubs\Commands\UpdateGitHub\" />
   </ItemGroup>
 
 </Project>
