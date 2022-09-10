@@ -54,6 +54,7 @@ public class KodlamaDevDbContext : DbContext
         operationClaimEntityBuilder(modelBuilder);
         userEntityBuilder(modelBuilder);
         userOperationClaimEntityBuilder(modelBuilder);
+        gitHubEntityBuilder(modelBuilder);
     }
 
     private void programmingLanguageEntityBuilder(ModelBuilder modelBuilder)
@@ -123,5 +124,13 @@ public class KodlamaDevDbContext : DbContext
             new(1,1,1),new(2,1,2)
         };
         builder.Entity<UserOperationClaim>().HasData(userOperationClaimSeeds);
+    }
+    private void gitHubEntityBuilder(ModelBuilder builder)
+    {
+        GitHub[] gitHubEntitySeeds =
+        {
+            new(1,"emir57",1),
+        };
+        builder.Entity<GitHub>().HasData(gitHubEntitySeeds);
     }
 }

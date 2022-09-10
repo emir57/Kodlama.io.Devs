@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Authorizations\Dtos\" />
+    <Folder Include="Features\GitHubs\Queries\" />
   </ItemGroup>
 
 </Project>
