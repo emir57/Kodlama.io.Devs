@@ -22,5 +22,4 @@ public interface IRepository<T> : IQuery<T> where T : Entity
     T Update(T entity);
     T HardDelete(T entity);
     T SoftDelete(T entity);
-    T UndoDelete(T entity);
 }

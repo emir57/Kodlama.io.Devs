@@ -26,5 +26,4 @@ public interface IAsyncRepository<T> : IQuery<T> where T : Entity
     Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default);
     Task<T> HardDeleteAsync(T entity, CancellationToken cancellationToken = default);
     Task<T> SoftDeleteAsync(T entity, CancellationToken cancellationToken = default);
-    Task<T> UndoDeleteAsync(T entity, CancellationToken cancellationToken = default);
 }

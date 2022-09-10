@@ -62,7 +62,7 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
 
     public IQueryable<TEntity> Query()
     {
-        return Context.Set<TEntity>().Where(x => x.DeletedAt.HasValue);
+        return Context.Set<TEntity>().Where(x => x.DeletedAt.HasValue == false);
     }
 
     public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
@@ -153,14 +153,6 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
-    public async Task<TEntity> UndoDeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
-    {
-        entity.DeletedAt = null;
-        Context.Entry(entity).State = EntityState.Modified;
-        await Context.SaveChangesAsync();
-        return entity;
-    }
-
     public TEntity SoftDelete(TEntity entity)
     {
         entity.DeletedAt = DateTime.Now;
@@ -169,11 +161,4 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
-    public TEntity UndoDelete(TEntity entity)
-    {
-        entity.DeletedAt = null;
-        Context.Entry(entity).State = EntityState.Modified;
-        Context.SaveChanges();
-        return entity;
-    }
 }
