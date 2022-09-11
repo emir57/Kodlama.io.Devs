@@ -33,7 +33,7 @@ public class ProgrammingLanguageTechnologiesController : BaseController
 
     [HttpPost]
     [Route("dynamic")]
-    public async Task<IActionResult> Dynamic([FromBody] Dynamic dynamic, PageRequest pageRequest)
+    public async Task<IActionResult> Dynamic([FromBody] Dynamic dynamic, [FromQuery] PageRequest pageRequest)
     {
         ListProgrammingLanguageTechnologyByDynamicQuery request = new()
         {
