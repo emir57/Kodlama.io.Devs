@@ -1,4 +1,5 @@
 ﻿using Core.Application.Requests;
+using Core.Persistence.Dynamic;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
@@ -6,6 +7,7 @@ using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Dtos;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Models;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Queries.ListProgrammingLanguage;
+using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Queries.ListProgrammingLanguageByDynamic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.devs.WebAPI.Controllers;
@@ -29,6 +31,19 @@ public class ProgrammingLanguagesController : BaseController
 
         ProgrammingLanguageListModel model = await Mediator.Send(listProgrammingLanguageQuery);
         return Ok(model);
+    }
+
+    [HttpPost]
+    [Route("dynamic")]
+    public async Task<IActionResult> Dynamic([FromBody] Dynamic dynamic, [FromQuery] PageRequest pageRequest)
+    {
+        ListProgrammingLanguageByDynamicQuery request = new()
+        {
+            Dynamic = dynamic,
+            PageRequest = pageRequest
+        };
+        ProgrammingLanguageListModel result = await Mediator.Send(request);
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
