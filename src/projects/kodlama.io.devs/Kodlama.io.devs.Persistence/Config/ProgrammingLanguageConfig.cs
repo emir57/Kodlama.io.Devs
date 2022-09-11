@@ -27,5 +27,13 @@ public class ProgrammingLanguageConfig : IEntityTypeConfiguration<ProgrammingLan
             .HasColumnName("UpdatedAt");
         builder.Property(p => p.DeletedAt)
             .HasColumnName("DeletedAt");
+
+        ProgrammingLanguage[] programmingLanguageEntitySeeds =
+        {
+            new(1,"C#",DateTime.Now),
+            new(2,"Java",DateTime.Now),
+            new(3,"JavaScript",DateTime.Now)
+        };
+        builder.HasData(programmingLanguageEntitySeeds);
     }
 }

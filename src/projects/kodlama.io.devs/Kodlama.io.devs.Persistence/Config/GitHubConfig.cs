@@ -21,5 +21,11 @@ public class GitHubConfig : IEntityTypeConfiguration<GitHub>
             .HasMaxLength(50);
 
         builder.Ignore(g => g.ProfileUrl);
+
+        GitHub[] gitHubEntitySeeds =
+        {
+            new(1,"emir57",1),
+        };
+        builder.HasData(gitHubEntitySeeds);
     }
 }

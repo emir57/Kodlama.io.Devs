@@ -48,13 +48,9 @@ public class KodlamaDevDbContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-        programmingLanguageEntityBuilder(modelBuilder);
-        programmingLanguageTechnologyEntityBuilder(modelBuilder);
-
         operationClaimEntityBuilder(modelBuilder);
         userEntityBuilder(modelBuilder);
         userOperationClaimEntityBuilder(modelBuilder);
-        gitHubEntityBuilder(modelBuilder);
     }
 
     private void programmingLanguageEntityBuilder(ModelBuilder modelBuilder)

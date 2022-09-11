@@ -31,5 +31,15 @@ public class ProgrammingLanguageTechnologyConfig : IEntityTypeConfiguration<Prog
             .HasColumnName("UpdatedAt");
         builder.Property(p => p.DeletedAt)
             .HasColumnName("DeletedAt");
+
+        ProgrammingLanguageTechnology[] programmingLanguageTechnologyEntitySeeds =
+        {
+            new(1,"Asp.Net",1,DateTime.Now),
+            new(2,"Spring",2,DateTime.Now),
+            new(3,"Angular",3,DateTime.Now),
+            new(4,"React",3,DateTime.Now),
+            new(5,"Vue",3,DateTime.Now)
+        };
+        builder.HasData(programmingLanguageTechnologyEntitySeeds);
     }
 }
