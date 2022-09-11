@@ -36,7 +36,8 @@ public sealed class LoginCommand : IRequest<AccessToken>
             User? user = await _userRepository.GetAsync(
                 u => u.Email.ToLower() == request.UserForLoginDto.Email.ToLower(),
                 include: x => x.Include(u => u.UserOperationClaims)
-                               .ThenInclude(u => u.OperationClaim));
+                               .ThenInclude(u => u.OperationClaim),
+                enableTracking: false);
 
             _authorizationBusinessRules.VerifyPassword(request.UserForLoginDto, user);
 
