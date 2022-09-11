@@ -25,5 +25,11 @@ public class OperationClaimConfig : IEntityTypeConfiguration<OperationClaim>
             .HasColumnName("UpdatedAt");
         builder.Property(p => p.DeletedAt)
             .HasColumnName("DeletedAt");
+
+        OperationClaim[] operationClaimEntitySeeds =
+        {
+            new(1,"User"),new(2,"Admin")
+        };
+        builder.HasData(operationClaimEntitySeeds);
     }
 }

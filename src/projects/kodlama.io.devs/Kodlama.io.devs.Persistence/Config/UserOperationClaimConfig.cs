@@ -32,5 +32,11 @@ public class UserOperationClaimConfig : IEntityTypeConfiguration<UserOperationCl
             .HasColumnName("UpdatedAt");
         builder.Property(p => p.DeletedAt)
             .HasColumnName("DeletedAt");
+
+        UserOperationClaim[] userOperationClaimSeeds =
+        {
+            new(1,1,1),new(2,1,2)
+        };
+        builder.HasData(userOperationClaimSeeds);
     }
 }

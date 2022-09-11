@@ -1,6 +1,8 @@
 ﻿using Core.Security.Entities;
+using Core.Security.Hashing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Configuration;
 
 namespace Kodlama.io.devs.Persistence.Config;
 
@@ -52,5 +54,37 @@ public class UserConfig : IEntityTypeConfiguration<User>
             .HasColumnName("UpdatedAt");
         builder.Property(p => p.DeletedAt)
             .HasColumnName("DeletedAt");
+
+        User user = getUser();
+
+        User[] userEntitySeeds =
+        {
+            user
+        };
+        builder.HasData(userEntitySeeds);
+
+        User getUser()
+        {
+            byte[] passwordHash, passwordSalt;
+            string password = configuration().GetSection("AdminUser:Password").Value;
+            HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            return new()
+            {
+                Id = 1,
+                FirstName = configuration().GetSection("AdminUser:FirstName").Value,
+                LastName = configuration().GetSection("AdminUser:LastName").Value,
+                Email = configuration().GetSection("AdminUser:Email").Value,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Status = true,
+                AuthenticatorType = Core.Security.Enums.AuthenticatorType.Email,
+                CreatedAt = DateTime.Now
+            };
+        }
+        IConfigurationRoot configuration()
+        {
+            return new ConfigurationManager()
+                .AddJsonFile("appsettings.json").Build();
+        }
     }
 }
