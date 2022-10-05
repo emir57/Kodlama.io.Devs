@@ -1,4 +1,5 @@
 ﻿using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using Kodlama.io.devs.Application.Features.Authorizations.Rules;
@@ -38,6 +39,7 @@ public static class ApplicationServiceRegistration
         #region PiplineBehaviors
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
         #endregion
 
 

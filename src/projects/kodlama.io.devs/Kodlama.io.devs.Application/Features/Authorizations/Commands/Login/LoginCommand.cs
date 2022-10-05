@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Logging;
 using Core.Security.Dtos;
 using Core.Security.Entities;
 using Core.Security.JWT;
