@@ -16,7 +16,7 @@ public sealed class OperationClaimBusinessRules
 
     public async Task OperationClaimNameCannotBeDuplicateWhenInsertedOrUpdated(string name)
     {
-        OperationClaim? operationClaim = await _operationClaimRepository.GetAsync(o => o.Name.ToLowerInvariant() == name.ToLowerInvariant());
+        OperationClaim? operationClaim = await _operationClaimRepository.GetAsync(o => o.Name.ToLower() == name.ToLower());
         if (operationClaim != null)
             throw new BusinessException(OperationClaimMessages.OperationClaimNameCannotBeDuplicated);
     }

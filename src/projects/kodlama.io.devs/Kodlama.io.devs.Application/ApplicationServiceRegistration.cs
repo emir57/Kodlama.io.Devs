@@ -4,6 +4,7 @@ using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using Kodlama.io.devs.Application.Features.Authorizations.Rules;
 using Kodlama.io.devs.Application.Features.GitHubs.Rules;
+using Kodlama.io.devs.Application.Features.OperationClaims.Rules;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Rules;
 using MediatR;
@@ -30,6 +31,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ProgrammingLanguageTechnologyBusinessRules>();
         services.AddScoped<AuthorizationBusinessRules>();
         services.AddScoped<GitHubBusinessRules>();
+        services.AddScoped<OperationClaimBusinessRules>();
         #endregion
 
         #region FluentValidation
