@@ -2,6 +2,7 @@
 using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using Kodlama.io.devs.Application.Features.OperationClaims.Dtos;
+using Kodlama.io.devs.Application.Features.OperationClaims.Rules;
 using Kodlama.io.devs.Application.Services.Repositories;
 using MediatR;
 
@@ -17,16 +18,19 @@ public sealed class CreateOperationClaimCommand : IRequest<CreatedOperationClaim
     {
         private readonly IOperationClaimRepository _operationClaimRepository;
         private readonly IMapper _mapper;
+        private readonly OperationClaimBusinessRules _operationClaimBusinessRules;
 
-        public CreateOperationClaimCommandHandler(IOperationClaimRepository operationClaimRepository, IMapper mapper)
+        public CreateOperationClaimCommandHandler(IOperationClaimRepository operationClaimRepository, IMapper mapper, OperationClaimBusinessRules operationClaimBusinessRules)
         {
             _operationClaimRepository = operationClaimRepository;
             _mapper = mapper;
+            _operationClaimBusinessRules = operationClaimBusinessRules;
         }
 
         public async Task<CreatedOperationClaim> Handle(CreateOperationClaimCommand request, CancellationToken cancellationToken)
         {
-            //todo: not duplicate when inserted
+            await _operationClaimBusinessRules
+                .OperationClaimNameCannotBeDuplicateWhenInsertedOrUpdated(request.Name);
 
             OperationClaim operationClaim = _mapper.Map<OperationClaim>(request);
 

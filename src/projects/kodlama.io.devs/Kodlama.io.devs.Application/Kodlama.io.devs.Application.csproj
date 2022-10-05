@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Authorizations\Dtos\" />
-    <Folder Include="Features\OperationClaims\Constants\" />
   </ItemGroup>
 
 </Project>
