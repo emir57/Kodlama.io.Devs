@@ -29,7 +29,7 @@ public sealed class DeleteOperationClaimCommand : IRequest<DeletedOperationClaim
             await _operationClaimBusinessRules
                 .OperationClaimShouldBeExistsWhenRequested(request.Id);
 
-            OperationClaim operationClaim = _mapper.Map<OperationClaim>(request);
+            OperationClaim operationClaim = await _operationClaimRepository.GetAsync(o => o.Id == request.Id);
 
             OperationClaim deletedOperationClaim = await _operationClaimRepository.HardDeleteAsync(operationClaim);
 
