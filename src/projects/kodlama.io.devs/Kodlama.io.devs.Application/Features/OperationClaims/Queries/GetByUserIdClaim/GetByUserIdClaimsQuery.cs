@@ -13,6 +13,13 @@ public sealed class GetByUserIdClaimsQuery : IRequest<ClaimListModel>
     public PageRequest PageRequest { get; set; }
     public int UserId { get; set; }
 
+    public GetByUserIdClaimsQuery() { }
+    public GetByUserIdClaimsQuery(PageRequest pageRequest, int userId) : this()
+    {
+        PageRequest = pageRequest;
+        UserId = userId;
+    }
+
     public sealed class GetByUserIdClaimsQueryHandler : IRequestHandler<GetByUserIdClaimsQuery, ClaimListModel>
     {
         private readonly IOperationClaimRepository _operationClaimRepository;

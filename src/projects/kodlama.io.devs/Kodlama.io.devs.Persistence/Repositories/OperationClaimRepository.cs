@@ -15,7 +15,7 @@ public class OperationClaimRepository : EfRepositoryBase<OperationClaim, Kodlama
         _context = context;
     }
 
-    public async Task<IPaginate<OperationClaim>> GetByUserIdAsync(int userId, int index = 0, int size = 10, Func<IQueryable<OperationClaim>, IOrderedQueryable<OperationClaim>>? orderby = null bool enableTracking = true, CancellationToken cancellationToken = default)
+    public async Task<IPaginate<OperationClaim>> GetByUserIdAsync(int userId, int index = 0, int size = 10, Func<IQueryable<OperationClaim>, IOrderedQueryable<OperationClaim>>? orderby = null, bool enableTracking = true, CancellationToken cancellationToken = default)
     {
         IQueryable<OperationClaim> operationClaimsQueryable = from uoc in _context.UserOperationClaims
                                                               join oc in _context.OperationClaims
