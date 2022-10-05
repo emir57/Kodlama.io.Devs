@@ -1,5 +1,6 @@
 ﻿using Core.Application.Requests;
 using Kodlama.io.devs.Application.Features.OperationClaims.Commands.CreateOperationClaim;
+using Kodlama.io.devs.Application.Features.OperationClaims.Commands.UpdateOperationClaim;
 using Kodlama.io.devs.Application.Features.OperationClaims.Dtos;
 using Kodlama.io.devs.Application.Features.OperationClaims.Models;
 using Kodlama.io.devs.Application.Features.OperationClaims.Queries.GetByUserIdClaim;
@@ -24,6 +25,13 @@ public class OperationClaimsController : BaseController
     public async Task<IActionResult> Post([FromBody] CreateOperationClaimCommand createOperationClaimCommand)
     {
         CreatedOperationClaim response = await Mediator.Send(createOperationClaimCommand);
+        return Ok(response);
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Put([FromBody] UpdateOperationClaimCommand updateOperationClaimCommand)
+    {
+        UpdatedOperationClaim response = await Mediator.Send(updateOperationClaimCommand);
         return Ok(response);
     }
 }

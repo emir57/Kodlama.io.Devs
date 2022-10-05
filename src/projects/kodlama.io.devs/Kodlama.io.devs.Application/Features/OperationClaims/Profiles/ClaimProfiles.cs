@@ -2,6 +2,7 @@
 using Core.Persistence.Paging;
 using Core.Security.Entities;
 using Kodlama.io.devs.Application.Features.OperationClaims.Commands.CreateOperationClaim;
+using Kodlama.io.devs.Application.Features.OperationClaims.Commands.UpdateOperationClaim;
 using Kodlama.io.devs.Application.Features.OperationClaims.Dtos;
 using Kodlama.io.devs.Application.Features.OperationClaims.Models;
 
@@ -16,8 +17,9 @@ public sealed class ClaimProfiles : Profile
         CreateMap<IPaginate<OperationClaim>, ClaimListModel>();
 
         CreateMap<CreateOperationClaimCommand, OperationClaim>().ReverseMap();
-
+        CreateMap<UpdateOperationClaimCommand, OperationClaim>().ReverseMap();
 
         CreateMap<CreatedOperationClaim, OperationClaim>().ReverseMap();
+        CreateMap<UpdatedOperationClaim, OperationClaim>().ReverseMap();
     }
 }
