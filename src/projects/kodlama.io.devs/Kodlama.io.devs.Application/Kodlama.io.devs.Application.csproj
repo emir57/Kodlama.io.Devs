@@ -21,6 +21,11 @@
 
   <ItemGroup>
     <Folder Include="Features\Authorizations\Dtos\" />
+    <Folder Include="Features\OperationClaims\Commands\" />
+    <Folder Include="Features\OperationClaims\Dtos\" />
+    <Folder Include="Features\OperationClaims\Constants\" />
+    <Folder Include="Features\OperationClaims\Profiles\" />
+    <Folder Include="Features\OperationClaims\Queries\" />
   </ItemGroup>
 
 </Project>

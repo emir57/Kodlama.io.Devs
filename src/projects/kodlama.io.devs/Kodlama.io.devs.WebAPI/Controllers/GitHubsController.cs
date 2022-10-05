@@ -2,7 +2,7 @@
 using Kodlama.io.devs.Application.Features.GitHubs.Commands.DeleteGitHub;
 using Kodlama.io.devs.Application.Features.GitHubs.Commands.UpdateGitHub;
 using Kodlama.io.devs.Application.Features.GitHubs.Dtos;
-using Kodlama.io.devs.Application.Features.GitHubs.Queries;
+using Kodlama.io.devs.Application.Features.GitHubs.Queries.GetByUserIdGitHub;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.devs.WebAPI.Controllers;

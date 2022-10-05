@@ -4,14 +4,13 @@ using Core.CrossCuttingConcerns.Exceptions;
 using Core.Security.Extensions;
 using Kodlama.io.devs.Application.Features.GitHubs.Constants;
 using Kodlama.io.devs.Application.Features.GitHubs.Dtos;
-using Kodlama.io.devs.Application.Features.GitHubs.Rules;
 using Kodlama.io.devs.Application.Services.Repositories;
 using Kodlama.io.devs.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kodlama.io.devs.Application.Features.GitHubs.Queries;
+namespace Kodlama.io.devs.Application.Features.GitHubs.Queries.GetByUserIdGitHub;
 
 public sealed class GetByUserGitHubQuery : IRequest<GetByUserGitHubDto>, ISecuredRequest
 {
