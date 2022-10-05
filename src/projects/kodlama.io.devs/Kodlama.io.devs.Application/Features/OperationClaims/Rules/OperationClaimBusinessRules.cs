@@ -20,4 +20,11 @@ public sealed class OperationClaimBusinessRules
         if (operationClaim != null)
             throw new BusinessException(OperationClaimMessages.OperationClaimNameCannotBeDuplicated);
     }
+
+    public async Task OperationClaimShouldBeExistsWhenRequested(int id)
+    {
+        OperationClaim? operationClaim = await _operationClaimRepository.GetAsync(o => o.Id == id);
+        if (operationClaim == null)
+            throw new BusinessException(OperationClaimMessages.OperationClaimShouldBeExists);
+    }
 }

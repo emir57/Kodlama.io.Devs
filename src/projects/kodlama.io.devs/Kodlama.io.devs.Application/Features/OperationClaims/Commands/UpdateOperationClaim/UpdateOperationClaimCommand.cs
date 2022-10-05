@@ -27,7 +27,8 @@ public sealed class UpdateOperationClaimCommand : IRequest<UpdatedOperationClaim
 
         public async Task<UpdatedOperationClaim> Handle(UpdateOperationClaimCommand request, CancellationToken cancellationToken)
         {
-            //todo: check exists
+            await _operationClaimBusinessRules
+                .OperationClaimShouldBeExistsWhenRequested(request.Id);
 
             await _operationClaimBusinessRules
                 .OperationClaimNameCannotBeDuplicateWhenInsertedOrUpdated(request.Name);

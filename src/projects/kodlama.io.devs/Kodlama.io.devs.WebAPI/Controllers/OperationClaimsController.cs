@@ -1,5 +1,6 @@
 ﻿using Core.Application.Requests;
 using Kodlama.io.devs.Application.Features.OperationClaims.Commands.CreateOperationClaim;
+using Kodlama.io.devs.Application.Features.OperationClaims.Commands.DeleteOperationClaim;
 using Kodlama.io.devs.Application.Features.OperationClaims.Commands.UpdateOperationClaim;
 using Kodlama.io.devs.Application.Features.OperationClaims.Dtos;
 using Kodlama.io.devs.Application.Features.OperationClaims.Models;
@@ -32,6 +33,13 @@ public class OperationClaimsController : BaseController
     public async Task<IActionResult> Put([FromBody] UpdateOperationClaimCommand updateOperationClaimCommand)
     {
         UpdatedOperationClaim response = await Mediator.Send(updateOperationClaimCommand);
+        return Ok(response);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete([FromRoute] DeleteOperationClaimCommand deleteOperationClaimCommand)
+    {
+        DeletedOperationClaim response = await Mediator.Send(deleteOperationClaimCommand);
         return Ok(response);
     }
 }
