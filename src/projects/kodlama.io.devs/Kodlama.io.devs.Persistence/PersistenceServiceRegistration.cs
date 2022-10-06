@@ -19,6 +19,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IGitHubRepository, GitHubRepository>();
         services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
+        services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
 
         #endregion
 
