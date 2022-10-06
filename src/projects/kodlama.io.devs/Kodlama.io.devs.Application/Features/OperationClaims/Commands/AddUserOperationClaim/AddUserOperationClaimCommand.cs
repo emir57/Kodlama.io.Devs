@@ -7,4 +7,13 @@ public sealed class AddUserOperationClaimCommand : IRequest<AddedUserOperationCl
 {
     public int UserId { get; set; }
     public int OperationClaimId { get; set; }
+
+    public sealed class AddUserOperationClaimCommandHandler : IRequestHandler<AddUserOperationClaimCommand, AddedUserOperationClaimDto>
+    {
+        
+        public Task<AddedUserOperationClaimDto> Handle(AddUserOperationClaimCommand request, CancellationToken cancellationToken)
+        {
+            
+        }
+    }
 }

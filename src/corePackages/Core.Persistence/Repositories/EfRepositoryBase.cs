@@ -65,7 +65,7 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return Context.Set<TEntity>().Where(x => x.DeletedAt.HasValue == false);
     }
 
-    public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public virtual async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         Context.Entry(entity).State = EntityState.Added;
         await Context.SaveChangesAsync(cancellationToken);
