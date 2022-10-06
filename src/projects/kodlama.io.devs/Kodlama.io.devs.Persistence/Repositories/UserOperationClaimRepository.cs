@@ -17,7 +17,7 @@ public class UserOperationClaimRepository : EfRepositoryBase<UserOperationClaim,
         await Context.SaveChangesAsync(cancellationToken);
         UserOperationClaim? addedEntity = await GetAsync(u => u.Id == entity.Id,
             queryable => queryable.Include(u => u.User)
-                                  .Include(u => u.OperationClaim), false);
+                                  .Include(u => u.OperationClaim), false, cancellationToken);
 
         return addedEntity;
     }
