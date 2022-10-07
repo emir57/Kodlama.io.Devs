@@ -3,4 +3,5 @@
 public sealed class UserOperationClaimMessages
 {
     public static readonly string UserOperationClaimAlreadyExists = "User operation alreay exists";
+    public static readonly string OperationClaimShouldBeExists = "Operation claim should be exists";
 }
