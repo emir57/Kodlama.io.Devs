@@ -9,11 +9,13 @@ public sealed class UserOperationClaimBusinessRules
 {
     private readonly IUserOperationClaimRepository _userOperationClaimRepository;
     private readonly IOperationClaimRepository _operationClaimRepository;
+    private readonly IUserRepository _userRepository;
 
-    public UserOperationClaimBusinessRules(IUserOperationClaimRepository userOperationClaimRepository, IOperationClaimRepository operationClaimRepository)
+    public UserOperationClaimBusinessRules(IUserOperationClaimRepository userOperationClaimRepository, IOperationClaimRepository operationClaimRepository, IUserRepository userRepository)
     {
         _userOperationClaimRepository = userOperationClaimRepository;
         _operationClaimRepository = operationClaimRepository;
+        _userRepository = userRepository;
     }
 
     public async Task UserOperationClaimCannotBeDuplicatedWhenAddOrUpdate(int userId, int operationClaimId)
@@ -28,8 +30,15 @@ public sealed class UserOperationClaimBusinessRules
 
     public async Task OperationClaimShouldBeExists(int operationClaimId)
     {
-        OperationClaim? operationClaim = await _operationClaimRepository.GetAsync(o => o.Id == operationClaimId);
+        OperationClaim? operationClaim = await _operationClaimRepository.GetAsync(o => o.Id == operationClaimId, enableTracking: false);
         if (operationClaim is null)
             throw new BusinessException(UserOperationClaimMessages.OperationClaimShouldBeExists);
+    }
+
+    public async Task UserShouldBeExists(int userId)
+    {
+        User? user = await _userRepository.GetAsync(u => u.Id == userId, enableTracking: false);
+        if (user is null)
+            throw new BusinessException(UserOperationClaimMessages.UserShouldBeExists);
     }
 }

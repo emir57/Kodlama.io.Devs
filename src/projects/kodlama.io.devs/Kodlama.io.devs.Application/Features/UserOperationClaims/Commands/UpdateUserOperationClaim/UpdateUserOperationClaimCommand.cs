@@ -29,6 +29,9 @@ public sealed class UpdateUserOperationClaimCommand : IRequest<UpdatedUserOperat
         public async Task<UpdatedUserOperationClaimDto> Handle(UpdateUserOperationClaimCommand request, CancellationToken cancellationToken)
         {
             await _userOperationClaimBusinessRules
+                .UserShouldBeExists(request.UserId);
+
+            await _userOperationClaimBusinessRules
                 .OperationClaimShouldBeExists(request.OperationClaimId);
 
             await _userOperationClaimBusinessRules
