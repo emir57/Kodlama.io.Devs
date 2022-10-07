@@ -7,6 +7,7 @@ using Kodlama.io.devs.Application.Features.GitHubs.Rules;
 using Kodlama.io.devs.Application.Features.OperationClaims.Rules;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.devs.Application.Features.ProgrammingLanguageTechnologies.Rules;
+using Kodlama.io.devs.Application.Features.UserOperationClaims.Rules;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<AuthorizationBusinessRules>();
         services.AddScoped<GitHubBusinessRules>();
         services.AddScoped<OperationClaimBusinessRules>();
+        services.AddScoped<UserOperationClaimBusinessRules>();
         #endregion
 
         #region FluentValidation
