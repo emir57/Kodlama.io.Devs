@@ -4,7 +4,7 @@ using Kodlama.io.devs.Application.Features.OperationClaims.Commands.DeleteOperat
 using Kodlama.io.devs.Application.Features.OperationClaims.Commands.UpdateOperationClaim;
 using Kodlama.io.devs.Application.Features.OperationClaims.Dtos;
 using Kodlama.io.devs.Application.Features.OperationClaims.Models;
-using Kodlama.io.devs.Application.Features.OperationClaims.Queries.GetByUserIdClaim;
+using Kodlama.io.devs.Application.Features.OperationClaims.Queries.GetListClaims;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.devs.WebAPI.Controllers;
@@ -14,10 +14,10 @@ namespace Kodlama.io.devs.WebAPI.Controllers;
 public class OperationClaimsController : BaseController
 {
 
-    [HttpGet("[action]")]
-    public async Task<IActionResult> GetByUserId([FromQuery] PageRequest pageRequest, int userId)
+    [HttpGet()]
+    public async Task<IActionResult> Get([FromQuery] PageRequest pageRequest)
     {
-        GetByUserIdClaimsQuery request = new(pageRequest, userId);
+        GetListClaimsQuery request = new(pageRequest);
         ClaimListModel response = await Mediator.Send(request);
         return Ok(response);
     }
