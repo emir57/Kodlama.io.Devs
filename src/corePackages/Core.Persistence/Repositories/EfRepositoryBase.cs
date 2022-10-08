@@ -138,14 +138,14 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
         return entity;
     }
 
-    public async Task<TEntity> HardDeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public virtual async Task<TEntity> HardDeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         Context.Entry(entity).State = EntityState.Deleted;
         await Context.SaveChangesAsync(cancellationToken);
         return entity;
     }
 
-    public async Task<TEntity> SoftDeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
+    public virtual async Task<TEntity> SoftDeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
     {
         entity.DeletedAt = DateTime.Now;
         Context.Entry(entity).State = EntityState.Modified;

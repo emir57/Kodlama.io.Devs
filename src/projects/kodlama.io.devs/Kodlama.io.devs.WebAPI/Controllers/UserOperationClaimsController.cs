@@ -1,4 +1,5 @@
 ﻿using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.CreateUserOperationClaim;
+using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.DeleteUserOperationClaimCommand;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.UpdateUserOperationClaim;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -19,8 +20,15 @@ namespace Kodlama.io.devs.WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateUserOperationClaimCommand updateUserOperationClaimCommand)
         {
-            UpdatedUserOperationClaimDto resposne = await Mediator.Send(updateUserOperationClaimCommand);
-            return Ok(resposne);
+            UpdatedUserOperationClaimDto response = await Mediator.Send(updateUserOperationClaimCommand);
+            return Ok(response);
+        }
+
+        [HttpDelete("users/{userId}/claims/{operationClaimId}")]
+        public async Task<IActionResult> Delete([FromRoute] DeleteUserOperationClaimCommand deleteUserOperationClaimCommand)
+        {
+            DeletedUserOperationClaimDto response = await Mediator.Send(deleteUserOperationClaimCommand);
+            return Ok(response);
         }
     }
 }

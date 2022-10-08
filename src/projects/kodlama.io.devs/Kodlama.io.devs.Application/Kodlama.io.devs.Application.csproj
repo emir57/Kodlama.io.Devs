@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Authorizations\Dtos\" />
-    <Folder Include="Features\UserOperationClaims\Commands\DeleteUserOperationClaimCommand\" />
     <Folder Include="Features\UserOperationClaims\Models\" />
     <Folder Include="Features\UserOperationClaims\Queries\" />
   </ItemGroup>
