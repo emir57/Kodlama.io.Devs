@@ -1,7 +1,10 @@
-﻿using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.CreateUserOperationClaim;
+﻿using Core.Application.Requests;
+using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.CreateUserOperationClaim;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.DeleteUserOperationClaimCommand;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.UpdateUserOperationClaim;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Dtos;
+using Kodlama.io.devs.Application.Features.UserOperationClaims.Models;
+using Kodlama.io.devs.Application.Features.UserOperationClaims.Queries.ListUserClaims;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.devs.WebAPI.Controllers
@@ -10,6 +13,15 @@ namespace Kodlama.io.devs.WebAPI.Controllers
     [Route("api/[controller]")]
     public class UserOperationClaimsController : BaseController
     {
+
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetByUserId([FromQuery] PageRequest pageRequest, [FromRoute] int userId)
+        {
+            GetListUserClaimsQuery getListUserClaimsQuery = new(userId, pageRequest);
+            UserClaimListModel userClaimListModel = await Mediator.Send(getListUserClaimsQuery);
+            return Ok(userClaimListModel);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateUserOperationClaimCommand createUserOperationClaimCommand)
         {

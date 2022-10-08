@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Core.Persistence.Paging;
 using Core.Security.Entities;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.CreateUserOperationClaim;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.DeleteUserOperationClaimCommand;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.UpdateUserOperationClaim;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Dtos;
+using Kodlama.io.devs.Application.Features.UserOperationClaims.Models;
 
 namespace Kodlama.io.devs.Application.Features.UserOperationClaims.Profiles;
 
@@ -27,6 +29,9 @@ public sealed class UserOperationClaimProfiles : Profile
             .ForMember(x => x.UserEmail, opt => opt.MapFrom(x => x.User.Email))
             .ForMember(x => x.OperationClaimName, opt => opt.MapFrom(x => x.OperationClaim.Name))
             .ReverseMap();
+
+        CreateMap<OperationClaim, ListUserClaimDto>().ReverseMap();
+        CreateMap<IPaginate<OperationClaim>, UserClaimListModel>().ReverseMap();
 
     }
 }
