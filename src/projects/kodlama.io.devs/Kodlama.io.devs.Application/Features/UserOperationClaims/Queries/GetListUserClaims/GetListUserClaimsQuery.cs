@@ -7,7 +7,7 @@ using Kodlama.io.devs.Application.Features.UserOperationClaims.Models;
 using Kodlama.io.devs.Application.Services.Repositories;
 using MediatR;
 
-namespace Kodlama.io.devs.Application.Features.UserOperationClaims.Queries.ListUserClaims;
+namespace Kodlama.io.devs.Application.Features.UserOperationClaims.Queries.GetListUserClaims;
 
 public sealed class GetListUserClaimsQuery : IRequest<UserClaimListModel>, ISecuredRequest
 {

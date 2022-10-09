@@ -4,7 +4,7 @@ using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.DeleteUs
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Commands.UpdateUserOperationClaim;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Dtos;
 using Kodlama.io.devs.Application.Features.UserOperationClaims.Models;
-using Kodlama.io.devs.Application.Features.UserOperationClaims.Queries.ListUserClaims;
+using Kodlama.io.devs.Application.Features.UserOperationClaims.Queries.GetListUserClaims;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.devs.WebAPI.Controllers
