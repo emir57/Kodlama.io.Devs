@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using Kodlama.io.devs.Application.Features.OperationClaims.Dtos;
 using Kodlama.io.devs.Application.Features.OperationClaims.Rules;
@@ -7,9 +8,11 @@ using MediatR;
 
 namespace Kodlama.io.devs.Application.Features.OperationClaims.Commands.DeleteOperationClaim;
 
-public sealed class DeleteOperationClaimCommand : IRequest<DeletedOperationClaim>
+public sealed class DeleteOperationClaimCommand : IRequest<DeletedOperationClaim>, ISecuredRequest
 {
     public int Id { get; set; }
+
+    public string[] Roles => new[] { "Admin" };
 
     public sealed class DeleteOperationClaimCommandHandler : IRequestHandler<DeleteOperationClaimCommand, DeletedOperationClaim>
     {

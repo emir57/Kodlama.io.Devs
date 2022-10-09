@@ -2,9 +2,9 @@
 
 namespace Kodlama.io.devs.Application.Features.UserOperationClaims.Queries.GetListUserClaims;
 
-public sealed class GetListUserClaimQueryValidator : AbstractValidator<GetListUserClaimsQuery>
+public sealed class GetListUserClaimsQueryValidator : AbstractValidator<GetListUserClaimsQuery>
 {
-    public GetListUserClaimQueryValidator()
+    public GetListUserClaimsQueryValidator()
     {
         RuleFor(g => g.UserId)
             .NotEmpty()
